@@ -8,7 +8,9 @@
     <title>@yield('title')</title>
 </head>
 <body>
+    <header>Хедер</header>
     <h1>Header</h1>
     @yield('content')
+    <footer>футер</footer>
 </body>
 </html>
