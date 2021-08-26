@@ -1,5 +1,5 @@
 
-@extends('layout.main_without_sidebar')
+@extends('layout.main')
 
 @section('content')
     <x-auth-card>
