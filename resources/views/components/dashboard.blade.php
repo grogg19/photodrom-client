@@ -1,4 +1,4 @@
-@extends('layout.main')
+@extends('layout.main_without_sidebar')
 
 @section('title', 'Административный раздел')
 

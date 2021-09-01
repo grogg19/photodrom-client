@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="no-js">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="no-js">
 <head>
     <title>@yield('title', 'Photodrome')</title>
 
@@ -21,6 +21,10 @@
     @include('partials.header')
     <!-- End Header -->
 
+    @if (session('status'))
+        @include('flash.success')
+    @endif
+
     <!-- photos-section
         ================================================== -->
     <section class="photos-section masonry">
@@ -41,7 +45,7 @@
     <img alt="" src="{{ asset('images/loader.gif') }}">
 </div>
 
-
+@include('partials.scripts')
 
 </body>
 </html>
