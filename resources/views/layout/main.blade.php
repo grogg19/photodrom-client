@@ -8,8 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <link rel="stylesheet" href="css/shutter-assets.min.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="{{ asset('css/shutter-assets.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
 
 </head>
 <body class="dark-skin">
@@ -38,13 +38,9 @@
 <!-- End Container -->
 
 <div class="preloader">
-    <img alt="" src="images/loader.gif">
+    <img alt="" src="{{ asset('images/loader.gif') }}">
 </div>
 
-<script src="js/shutter-plugins.min.js"></script>
-<script src="js/popper.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/script.js"></script>
 
 
 </body>
