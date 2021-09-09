@@ -5,5 +5,4 @@
     <div class="container">
         <p class="copyright-line">All rights reserved 2018. Made with love and passion</p>
     </div>
-
 </footer>

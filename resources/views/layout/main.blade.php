@@ -9,13 +9,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <link rel="stylesheet" href="{{ asset('css/shutter-assets.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ mix('css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 
 </head>
 <body class="dark-skin">
 
 <!-- Container -->
-<div id="container">
+<div id="app">
     <!-- Header
         ================================================== -->
     @include('partials.header')
