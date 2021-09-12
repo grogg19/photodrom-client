@@ -1,5 +1,5 @@
 @extends('layout.main')
 
 @section('content')
-    <photos></photos>
+    <photo-list></photo-list>
 @endsection

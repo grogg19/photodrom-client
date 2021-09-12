@@ -10,6 +10,7 @@
 
     <link rel="stylesheet" href="{{ asset('css/shutter-assets.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ mix('css/style.css') }}">
+
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 
 </head>
