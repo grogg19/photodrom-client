@@ -13,13 +13,12 @@ class CreateTagPhotoTable extends Migration
      */
     public function up()
     {
-        Schema::create('tag_photo', function (Blueprint $table) {
-
+        Schema::create('taggables', function (Blueprint $table)
+        {
             $table->unsignedInteger('tag_id');
-            $table->unsignedInteger('photo_id');
-            $table->primary(['tag_id', 'photo_id']);
+            $table->morphs('taggable');
+            $table->primary(['tag_id', 'taggable_id', 'taggable_type']);
             $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
-            $table->timestamps();
         });
     }
 
@@ -30,6 +29,6 @@ class CreateTagPhotoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tag_photo');
+        Schema::dropIfExists('taggables');
     }
 }
