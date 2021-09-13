@@ -18,6 +18,9 @@ class DatabaseSeeder extends Seeder
             'name' => 'Anton Devyatov',
             'email' => 'differ@list.ru'
         ]);
-        // \App\Models\User::factory(10)->create();
+
+        $this->call([
+            PhotoSeeder::class,
+        ]);
     }
 }

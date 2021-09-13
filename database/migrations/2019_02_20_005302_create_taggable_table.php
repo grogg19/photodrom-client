@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTagPhotoTable extends Migration
+class CreateTaggableTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTagPhotoTable extends Migration
      */
     public function up()
     {
-        Schema::create('taggables', function (Blueprint $table)
+        Schema::create('taggable', function (Blueprint $table)
         {
             $table->unsignedInteger('tag_id');
             $table->morphs('taggable');
@@ -29,6 +29,6 @@ class CreateTagPhotoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('taggables');
+        Schema::dropIfExists('taggable');
     }
 }
