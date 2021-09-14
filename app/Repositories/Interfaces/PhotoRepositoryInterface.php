@@ -6,5 +6,5 @@ use Illuminate\Support\Collection;
 
 interface PhotoRepositoryInterface
 {
-    public function getListPhotos(): Collection;
+    public function getListPhotos();
 }
