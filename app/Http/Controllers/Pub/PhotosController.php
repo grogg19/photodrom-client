@@ -32,4 +32,20 @@ class PhotosController extends Controller
 
         return view('photos', compact('listPhotos'));
     }
+
+    public function showThumb($year,$month,$name) {
+        header('Content-type:image/jpeg');
+        return readfile("/media/hdd/albums/".$year."/".$month."/thumbnails/big/".$name);
+    }
+
+    public function showOriginal($year,$month,$name) {
+        header('Content-type:image/jpeg');
+        return readfile("/media/hdd/albums/".$year."/".$month."/original/".$name);
+    }
+
+    public function showSmall($year,$month,$name) {
+        header('Content-type:image/jpeg');
+        return readfile("/media/hdd/albums/".$year."/".$month."/thumbnails/small/".$name);
+    }
+
 }
