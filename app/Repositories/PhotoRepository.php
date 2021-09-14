@@ -10,7 +10,8 @@ class PhotoRepository implements PhotoRepositoryInterface
 {
     public function getListPhotos($currentPage = 1, int $perPage = 30): LengthAwarePaginator
     {
-        return Photo::with('tags')
+        return Photo::latest()
+            ->with('tags')
             ->paginate($perPage, '*', 'page', $currentPage);
     }
 }
