@@ -1,36 +1,24 @@
 <template>
     <div class="photos-box iso-call">
         <!--  class types: latest random popular oldest -->
-        <div class="photo-post latest random">
-            <img src="upload/masonry/1.jpg" alt="">
-            <div class="hover-box">
-                <h2><a href="#">{{ test }}</a></h2>
-                <p><a class="likes" href="#">120 <i class="fa fa-heart"></i></a></p>
+            <div class="photo-post latest random post-gal" v-for="photo in photos.data">
+                <img v-bind:src="photo.url" alt="">
+                <a class="hover-box image-popup" v-bind:href="photo.url">
+                    <h2>{{ photo.photo_name }}</h2>
+                </a>
             </div>
-        </div>
-        <div class="photo-post latest random">
-            <img src="upload/masonry/1.jpg" alt="">
-            <div class="hover-box">
-                <h2><a href="#">Empty coffee cup</a></h2>
-                <p><a class="likes" href="#">120 <i class="fa fa-heart"></i></a></p>
-            </div>
-        </div>
-        <div class="photo-post latest random">
-            <img src="upload/masonry/1.jpg" alt="">
-            <div class="hover-box">
-                <h2><a href="#">Empty coffee cup</a></h2>
-                <p><a class="likes" href="#">120 <i class="fa fa-heart"></i></a></p>
-            </div>
-        </div>
     </div>
 </template>
 
 <script>
 export default {
 
+    props:['photos'],
+
     data() {
+
         return {
-            photos: 'test'
+
         }
     },
     mounted() {

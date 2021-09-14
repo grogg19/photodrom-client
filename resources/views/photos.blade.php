@@ -1,5 +1,5 @@
 @extends('layout.main')
 
 @section('content')
-    <photo-list></photo-list>
+    <photo-list :photos='@json($listPhotos)'></photo-list>
 @endsection
