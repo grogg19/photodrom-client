@@ -13,5 +13,8 @@ class PhotoRepository implements PhotoRepositoryInterface
         return Photo::latest()
             ->with('tags')
             ->paginate($perPage, '*', 'page', $currentPage);
+
+//        return Photo::with('tags')
+//            ->paginate($perPage, '*', 'page', $currentPage);
     }
 }

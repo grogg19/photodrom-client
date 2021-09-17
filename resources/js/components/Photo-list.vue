@@ -1,26 +1,56 @@
 <template>
-    <div class="photos-box iso-call">
+    <isotope class="photos-box iso-call" id="root_isotope" :list="images" :options="option" v-images-loaded:on.progress="layout" ref="cpt">
         <!--  class types: latest random popular oldest -->
-            <div class="photo-post latest random post-gal" v-for="photo in photos.data">
-                <img v-bind:src="'/albums' + changeStr(photo.url) + photo.file_name" alt="">
-                <a class="hover-box image-popup" v-bind:href="'/albums' + changeStrToBig(photo.url) + photo.file_name">
-                    <h2>{{ photo.photo_name }}</h2>
-                </a>
-            </div>
-    </div>
+        <div class="photo-post latest random post-gal" v-for="photo in images" :key="photo.id">
+            <img v-bind:src="'/albums' + changeStr(photo.url) + photo.file_name" alt="">
+            <a class="hover-box image-popup" v-bind:href="'/albums' + changeStrToBig(photo.url) + photo.file_name">
+                <h2>{{ photo.photo_name }}</h2>
+            </a>
+        </div>
+    </isotope>
 </template>
 
 <script>
+
+import isotope from 'vueisotope'
+import imagesLoaded from 'vue-images-loaded'
+
+
 export default {
 
     props:['photos'],
 
-    data() {
+    components: {
+        'isotope': isotope,
+    },
 
+    directives: {
+        imagesLoaded
+    },
+
+
+    data() {
         return {
+            selected: null,
+            images: this.photos.data,
+            option: {
+                sortBy : null,
+            },
+            nextPage: this.photos.next_page_url,
+            isotope: null,
+            container: document.querySelector('.iso-call')
         }
     },
+
+    created() {
+        //console.log(this.photos)
+    },
+
+    updated() {
+    },
+
     mounted() {
+        this.scroll();
     },
 
     methods: {
@@ -30,7 +60,41 @@ export default {
 
         changeStrToBig(data) {
             return data.replace('original', 'thumbnails/big')
+        },
+
+        infiniteHandler() {
+
+            axios.get(this.nextPage, {})
+                .then((response) => {
+                    this.images = this.images.concat(response.data.data)
+
+                    // response.data.data.forEach((item) => {
+                    //     this.isotope = new Isotope(('.photo-post'), {
+                    //         layoutMode: 'masonry'
+                    //     })
+                    //     this.images.push(item)
+                    //     this.isotope.layout()
+                    // })
+                    this.nextPage = response.data.next_page_url
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        },
+
+        scroll() {
+            window.onscroll = () => {
+                let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
+
+                if (bottomOfWindow && this.nextPage!== null) {
+                    this.infiniteHandler()
+                }
+            };
+        },
+        layout () {
+            this.$refs.cpt.layout('masonry');
         }
+
     }
 }
 </script>

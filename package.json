@@ -22,6 +22,9 @@
         "vue-template-compiler": "^2.6.14"
     },
     "dependencies": {
-        "vue": "^2.6.14"
+        "vue": "^2.6.14",
+        "vue-images-loaded": "^1.1.2",
+        "vue-infinite-loading": "^2.4.5",
+        "vueisotope": "^3.1.2"
     }
 }

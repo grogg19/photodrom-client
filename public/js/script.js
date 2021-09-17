@@ -1,13 +1,14 @@
 /*jshint jquery:true */
-
+//test()
 $(document).ready(function($) {
 	"use strict";
-	
+
 	/*jshint -W018 */
 
 	/*-------------------------------------------------*/
 	/* =  portfolio isotope
 	/*-------------------------------------------------*/
+
 
 	var winDow = $(window);
 		// Needed variables
@@ -15,19 +16,19 @@ $(document).ready(function($) {
 		var $filter=$('.filter');
 
 		try{
-			$container.imagesLoaded( function(){
-				$container.trigger('resize');
-				$container.isotope({
-					filter:'*',
-					layoutMode:'masonry',
-					animationOptions:{
-						duration:750,
-						easing:'linear'
-					}
-				});
-
-				setTimeout(Resize, 1500);
-			});
+			// $container.imagesLoaded( function(){
+			// 	$container.trigger('resize');
+			// 	// $container.isotope({
+			// 	// 	filter:'*',
+			// 	// 	layoutMode:'masonry',
+			// 	// 	animationOptions:{
+			// 	// 		duration:750,
+			// 	// 		easing:'linear'
+			// 	// 	}
+			// 	// });
+            //
+			// 	setTimeout(Resize, 1500);
+			// });
 		} catch(err) {
 		}
 
@@ -35,7 +36,7 @@ $(document).ready(function($) {
 			var selector = $filter.find('a.active').attr('data-filter');
 
 			try {
-				$container.isotope({ 
+				$container.isotope({
 					filter	: selector,
 					animationOptions: {
 						duration: 750,
@@ -47,13 +48,13 @@ $(document).ready(function($) {
 			}
 			return false;
 		});
-		
-		// Isotope Filter 
+
+		// Isotope Filter
 		$filter.find('a').on('click', function(){
 			var selector = $(this).attr('data-filter');
 
 			try {
-				$container.isotope({ 
+				$container.isotope({
 					filter	: selector,
 					animationOptions: {
 						duration: 750,
@@ -81,7 +82,7 @@ $(document).ready(function($) {
 	/*-------------------------------------------------*/
 	/* =  preloader function
 	/*-------------------------------------------------*/
-	
+
 	$('#container').imagesLoaded(function(){
 		$('.preloader').fadeOut(400, function(){
 			$('#container').addClass('active');
@@ -157,7 +158,7 @@ $(document).ready(function($) {
 			closeFullscreen();
 			$(this).removeClass('active');
 		}
-		
+
 	});
 
 
@@ -236,7 +237,7 @@ $(document).ready(function($) {
 	/* =  multiscroll
 	/*-------------------------------------------------*/
 
-	
+
 	try{
 
 		$('#multiscroll').multiscroll({
@@ -255,7 +256,7 @@ $(document).ready(function($) {
 
 	} catch(err) {
 	}
-	
+
 	$('a.prev-section').on('click', function(event) {
 		event.preventDefault();
 		$.fn.multiscroll.moveSectionUp();
@@ -283,12 +284,12 @@ $(document).ready(function($) {
 	        }
 	    });
 	});
-	
+
 	/*-------------------------------------------------*/
-	/* =  Home Gallery scrolling between sections, 
+	/* =  Home Gallery scrolling between sections,
 	/* =  Fullscreen height of photo posts
 	/*-------------------------------------------------*/
-	
+
 
 	// scroll between sections
 
@@ -311,7 +312,7 @@ $(document).ready(function($) {
 				$('.scroller-list li a[href*=#'+containerID+']').addClass('active');
 			}
 		} , { offset: '10px' } );
-		
+
 		$(this).waypoint( function( direction ) {
 			if( direction === 'up' ) {
 				var containerID = $(this).attr('id');
@@ -416,7 +417,7 @@ $(document).ready(function($) {
 		$(storage).load(LoadContainer + " .photo-post, .blog-post", function(){
 
 			var elemloadedLength = $(storage).find('.photo-post, .blog-post').length;
-			
+
 			if ( !((s + 1) > elemloadedLength) ) {
 
 				s = i + xel;
@@ -436,7 +437,7 @@ $(document).ready(function($) {
 					$elems = $(storage).find(".photo-post:lt(" + s + "):gt("+ t +"), .blog-post:lt(" + s + "):gt("+ t +")").appendTo(PortContainer);
 					// append elements to container
 					$container.isotope( 'appended', $elems );
-					
+
 					setTimeout(Resize, 200);
 				}
 
@@ -448,9 +449,9 @@ $(document).ready(function($) {
 			}
 
 		});
-	
+
 	});
-	
+
 	/*-------------------------------------------------*/
 	/* =  flexslider
 	/*-------------------------------------------------*/
@@ -461,19 +462,19 @@ $(document).ready(function($) {
 		slideshowSpeed: 10000,
 		easing: "swing"
 	});
-	
+
 	/*-------------------------------------------------*/
 	/* =  Scroll to TOP
 	/*-------------------------------------------------*/
 
 	var animateTopButton = $('.go-top'),
 		htmBody = $('html, body');
-		
+
 	animateTopButton.on('click', function(){
 		htmBody.animate({scrollTop: 0}, 'slow');
 		return false;
 	});
-	
+
 	/*-------------------------------------------------*/
 	/* =  Comming soon section
 	/*-------------------------------------------------*/
@@ -513,7 +514,7 @@ $(document).ready(function($) {
 		e.preventDefault();
 
 		var $this = $(this);
-		
+
 		$.ajax({
 			type: "POST",
 			url: 'contact.php',
@@ -550,7 +551,7 @@ $(document).ready(function($) {
 				}
 			}, false );
 		}
-		
+
 		function scrollPage() {
 			var sy = scrollY();
 			if ( sy >= changeHeaderOn ) {
@@ -563,13 +564,13 @@ $(document).ready(function($) {
 			}
 			didScroll = false;
 		}
-		
+
 		function scrollY() {
 			return window.pageYOffset || docElem.scrollTop;
 		}
-		
+
 		init();
-		
+
 	})();
 
 });
@@ -577,7 +578,7 @@ $(document).ready(function($) {
 function Resize() {
 	$(window).trigger('resize');
 }
-	
+
 /* ---------------------------------------------------------------------- */
 /*	works carousel
 /* ---------------------------------------------------------------------- */
