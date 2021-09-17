@@ -15,7 +15,6 @@
 import isotope from 'vueisotope'
 import imagesLoaded from 'vue-images-loaded'
 
-
 export default {
 
     props:['photos'],
@@ -25,8 +24,9 @@ export default {
     },
 
     directives: {
-        imagesLoaded
+        imagesLoaded,
     },
+
 
 
     data() {
@@ -42,6 +42,7 @@ export default {
     },
 
     updated() {
+        this.popUpUpdate()
     },
 
     mounted() {
@@ -80,7 +81,17 @@ export default {
         },
         layout () {
             this.$refs.cpt.layout('masonry');
+        },
+
+        popUpUpdate() {
+            $('a.image-popup').magnificPopup({
+                type: 'image',
+                gallery: {
+                    enabled: true
+                }
+            });
         }
+
 
     }
 }

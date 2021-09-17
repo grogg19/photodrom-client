@@ -33,7 +33,6 @@ class PhotosController extends Controller
 
         /** @var LengthAwarePaginator $listPhotos */
         $listPhotos = $this->photoRepository->getListPhotos($currentPage, 20);
-        //dd($listPhotos->pluck('id'));
 
         if($currentPage > 1) {
             return response()->json($listPhotos);
