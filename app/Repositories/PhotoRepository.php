@@ -8,13 +8,10 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class PhotoRepository implements PhotoRepositoryInterface
 {
-    public function getListPhotos($currentPage = 1, int $perPage = 30): LengthAwarePaginator
+    public function getListPhotos($currentPage = 1, int $perPage = 20): LengthAwarePaginator
     {
-        return Photo::latest()
+        return Photo::orderBy('date_exif', 'desc')
             ->with('tags')
             ->paginate($perPage, '*', 'page', $currentPage);
-
-//        return Photo::with('tags')
-//            ->paginate($perPage, '*', 'page', $currentPage);
     }
 }

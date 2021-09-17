@@ -1,5 +1,5 @@
 <template>
-    <isotope class="photos-box iso-call" id="root_isotope" :list="images" :options="option" v-images-loaded:on.progress="layout" ref="cpt">
+    <isotope class="photos-box iso-call" :list="images" :options="option" v-images-loaded:on.progress="layout" ref="cpt">
         <!--  class types: latest random popular oldest -->
         <div class="photo-post latest random post-gal" v-for="photo in images" :key="photo.id">
             <img v-bind:src="'/albums' + changeStr(photo.url) + photo.file_name" alt="">
@@ -34,16 +34,11 @@ export default {
             selected: null,
             images: this.photos.data,
             option: {
-                sortBy : null,
+                //sortBy : null,
             },
             nextPage: this.photos.next_page_url,
-            isotope: null,
-            container: document.querySelector('.iso-call')
-        }
-    },
 
-    created() {
-        //console.log(this.photos)
+        }
     },
 
     updated() {
@@ -67,14 +62,6 @@ export default {
             axios.get(this.nextPage, {})
                 .then((response) => {
                     this.images = this.images.concat(response.data.data)
-
-                    // response.data.data.forEach((item) => {
-                    //     this.isotope = new Isotope(('.photo-post'), {
-                    //         layoutMode: 'masonry'
-                    //     })
-                    //     this.images.push(item)
-                    //     this.isotope.layout()
-                    // })
                     this.nextPage = response.data.next_page_url
                 })
                 .catch(error => {

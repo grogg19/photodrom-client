@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Pub;
 use App\Http\Controllers\Controller;
 use App\Repositories\Interfaces\PhotoRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use function MongoDB\BSON\toJSON;
 
 class PhotosController extends Controller
@@ -30,7 +31,9 @@ class PhotosController extends Controller
     {
         $currentPage = $request->get('page') ?: 1;
 
+        /** @var LengthAwarePaginator $listPhotos */
         $listPhotos = $this->photoRepository->getListPhotos($currentPage, 20);
+        //dd($listPhotos->pluck('id'));
 
         if($currentPage > 1) {
             return response()->json($listPhotos);

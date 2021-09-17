@@ -1,5 +1,6 @@
 /*jshint jquery:true */
 //test()
+window.scrollTo(0, 0);
 $(document).ready(function($) {
 	"use strict";
 
