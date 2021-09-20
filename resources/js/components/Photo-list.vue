@@ -37,6 +37,7 @@ export default {
                 //sortBy : null,
             },
             nextPage: this.photos.next_page_url,
+            workInProgress: false
 
         }
     },
@@ -46,7 +47,14 @@ export default {
     },
 
     mounted() {
-        this.scroll();
+        window.onscroll = () => {
+            let bottomOfWindow = Math.floor(document.documentElement.scrollTop + window.innerHeight) === Math.floor(document.documentElement.offsetHeight);
+
+            if (bottomOfWindow && this.nextPage!== null) {
+                this.workInProgress = true
+                this.infiniteHandler()
+            }
+        };
     },
 
     methods: {
@@ -59,25 +67,23 @@ export default {
         },
 
         infiniteHandler() {
-
-            axios.get(this.nextPage, {})
-                .then((response) => {
-                    this.images = this.images.concat(response.data.data)
-                    this.nextPage = response.data.next_page_url
-                })
-                .catch(error => {
-                    console.log(error);
-                })
+            if (this.workInProgress === true) {
+                axios.get(this.nextPage, {})
+                    .then((response) => {
+                        this.images = this.images.concat(response.data.data)
+                        this.nextPage = response.data.next_page_url
+                        setTimeout(function() {
+                            this.workInProgress = false;
+                        }, 4000);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+            }
         },
 
         scroll() {
-            window.onscroll = () => {
-                let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
 
-                if (bottomOfWindow && this.nextPage!== null) {
-                    this.infiniteHandler()
-                }
-            };
         },
         layout () {
             this.$refs.cpt.layout('masonry');
@@ -91,8 +97,6 @@ export default {
                 }
             });
         }
-
-
     }
 }
 </script>
