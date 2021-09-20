@@ -1814,10 +1814,10 @@ section.photos-section.masonry .photos-box .photo-post img {
 }
 section.photos-section.masonry .photos-box .photo-post .hover-box {
   position: absolute;
-  top: 15px;
-  bottom: 15px;
-  left: 15px;
-  right: 15px;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  right: 4px;
   background: rgba(255, 255, 255, 0.3);
   text-align: center;
   transition: all 0.2s ease-in-out;
