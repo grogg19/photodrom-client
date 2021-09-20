@@ -1818,7 +1818,7 @@ section.photos-section.masonry .photos-box .photo-post .hover-box {
   bottom: 15px;
   left: 15px;
   right: 15px;
-  background: white;
+  background: rgba(255, 255, 255, 0.3);
   text-align: center;
   transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;
