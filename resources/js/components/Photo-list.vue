@@ -3,8 +3,9 @@
         <!--  class types: latest random popular oldest -->
         <div class="photo-post latest random post-gal" v-for="photo in images" :key="photo.id">
             <img v-bind:src="'/albums' + changeStr(photo.url) + photo.file_name" alt="">
-            <a class="hover-box image-popup" v-bind:href="'/albums' + changeStrToBig(photo.url) + photo.file_name">
+            <a class="hover-box image-popup" v-bind:href="'/albums' + changeStr(photo.url) + photo.file_name">
                 <h2>{{ photo.photo_name }}</h2>
+                <p><i class="fas fa-clock"></i> {{ photo.date_exif}}</p>
             </a>
         </div>
     </isotope>

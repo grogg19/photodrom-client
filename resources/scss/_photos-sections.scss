@@ -118,7 +118,7 @@ section.photos-section.grid-boxed {
 				bottom: 10px;
 				left: 10px;
 				right: 10px;
-				background: rgba(255,255,255, 0.96);
+				background: rgba(255,255,255, 1);
 				text-align: center;
 				@include transition(0.2s);
 				opacity: 0;
@@ -220,7 +220,7 @@ section.photos-section.masonry {
 				bottom: 15px;
 				left: 15px;
 				right: 15px;
-				background: rgba(255,255,255, 1);
+				background: rgba(255,255,255, 0.2);
 				text-align: center;
 				@include transition(0.2s);
 				opacity: 0;

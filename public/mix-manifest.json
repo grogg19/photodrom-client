@@ -2,5 +2,7 @@
     "/js/app.js": "/js/app.js",
     "/js/bootstrap.js": "/js/bootstrap.js",
     "/js/vue-components.js": "/js/vue-components.js",
-    "/css/style.css": "/css/style.css"
+    "/css/style.css": "/css/style.css",
+    "/css/forms.css": "/css/forms.css",
+    "/css/app.css": "/css/app.css"
 }

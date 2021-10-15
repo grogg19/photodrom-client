@@ -9,14 +9,7 @@ Route::get('/albums/{year}/{month}/thumbnails/big/{name}', [PhotosController::cl
 Route::get('/albums/{year}/{month}/thumbnails/small/{name}', [PhotosController::class, 'showSmall']);
 Route::get('/albums/{year}/{month}/original/{name}', [PhotosController::class, 'showOriginal']);
 
-
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
-
-
 require __DIR__.'/auth.php';
+require __DIR__.'/admin.php';
 
 
