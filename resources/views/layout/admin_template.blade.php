@@ -9,9 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <link rel="stylesheet" href="{{ asset('css/shutter-assets.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ mix('css/app.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ mix('css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ mix('css/forms.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ mix('css/app.css') }}">
 
 </head>
 <body class="dark-skin">

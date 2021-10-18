@@ -13,11 +13,11 @@
     <div class="left-menu">
         @include('partials.nav')
         <ul class="social-icons">
-            <li><a class="facebook" href="#"><i class="fa fa-facebook-square"></i></a></li>
-            <li><a class="twitter" href="#"><i class="fa fa-twitter-square"></i></a></li>
-            <li><a class="pinterest" href="#"><i class="fa fa-pinterest-square"></i></a></li>
-            <li><a class="youtube" href="#"><i class="fa fa-youtube-play"></i></a></li>
-            <li><a class="vimeo" href="#"><i class="fa fa-vimeo-square"></i></a></li>
+            <li><a href="#"><i class="fab fa-facebook-square"></i></a></li>
+            <li><a href="#"><i class="fab fa-twitter-square"></i></a></li>
+            <li><a href="#"><i class="fab fa-pinterest-square"></i></a></li>
+            <li><a href="#"><i class="fab fa-youtube-square"></i></a></li>
+            <li><a href="#"><i class="fab fa-vimeo-square"></i></a></li>
         </ul>
         @guest()
             <div class="text-center auth-buttons">
