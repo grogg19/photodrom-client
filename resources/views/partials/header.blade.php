@@ -27,6 +27,20 @@
                 </div>
             </div>
         @endguest
+        @auth()
+        <!-- Settings Dropdown -->
+            <div class="text-center auth-buttons">
+                <div class="btn-group" role="group" aria-label="Login | Register">
+                    <a class="btn btn-outline-dark" href="{{ route('logout') }}"
+                       onclick="event.preventDefault();
+                       document.getElementById('logout-form').submit();"
+                       role="button">Выход</a>
+                </div>
+            </div>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
+        @endauth
     </div>
 
 </header>
