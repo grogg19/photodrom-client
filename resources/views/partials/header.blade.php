@@ -19,6 +19,7 @@
             <li><a href="#"><i class="fab fa-youtube-square"></i></a></li>
             <li><a href="#"><i class="fab fa-vimeo-square"></i></a></li>
         </ul>
+        <tags-input></tags-input>
         @guest()
             <div class="text-center auth-buttons">
                 <div class="btn-group" role="group" aria-label="Login | Register">
