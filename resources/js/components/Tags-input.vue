@@ -11,6 +11,7 @@ import multiselect from 'vue-multiselect'
 
 export default {
 
+    //props: ['tags'],
 
     components: {
         'multiselect': multiselect
@@ -19,11 +20,8 @@ export default {
         return {
             selectLabel: "Нажмите Enter чтобы выбрать",
             value: [],
-            options: [
-                { name: 'Мальдивы', code: 'maldivy' },
-                { name: 'Музей', code: 'musei' },
-                { name: 'Выставка', code: 'vystavka' }
-            ],
+            //options: this.tags,
+            options: []
         }
     },
     methods: {

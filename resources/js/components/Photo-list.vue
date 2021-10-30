@@ -6,6 +6,11 @@
             <a class="hover-box image-popup" v-bind:href="'/albums' + changeStrToBig(photo.url) + photo.file_name">
                 <h2>{{ photo.photo_name }}</h2>
                 <p><i class="fas fa-clock"></i> {{ photo.date_exif}}</p>
+                <ul class="mt-5 list-inline">
+                    <li v-for="tag in photo.tags" class="list-inline-item">
+                        <a v-bind:href="'/tag/' + tag.slug ">#{{ tag.name }}</a>
+                    </li>
+                </ul>
             </a>
         </div>
     </isotope>
@@ -18,7 +23,7 @@ import imagesLoaded from 'vue-images-loaded'
 
 export default {
 
-    props:['photos'],
+    props: ['photos'],
 
     components: {
         'isotope': isotope,
