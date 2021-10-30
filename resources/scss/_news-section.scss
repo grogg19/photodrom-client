@@ -530,10 +530,10 @@ section.blog-section {
 			@extend .reset-elem;
 			li {
 				display: inline-block;
-				margin-bottom: 15px;
+				margin-bottom: 5px;
 				margin-right: 7px;
 				a {
-					padding: 7px 20px;
+					padding: 0px 8px;
                     color: #37404d;
                     font-size: 13px;
                     font-family: $font-alternative3;
