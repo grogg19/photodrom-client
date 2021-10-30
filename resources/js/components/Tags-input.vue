@@ -1,7 +1,7 @@
 <template>
     <div class="tags-list">
         <label class="typo__label">Теги</label>
-        <multiselect v-model="value" tag-placeholder="Добавить тег" placeholder="Найти или добавить тег" label="name" track-by="code" :options="options" :multiple="true" :taggable="true" :hideSelected="true" @tag="addTag"></multiselect>
+        <multiselect v-model="value" tag-placeholder="Добавить тег" placeholder="Найти или добавить тег" label="name" track-by="code" :options="options" :multiple="true" :taggable="true" :hideSelected="true" @tag="addTag" :selectLabel="selectLabel"></multiselect>
     </div>
 </template>
 
@@ -10,19 +10,20 @@
 import multiselect from 'vue-multiselect'
 
 export default {
+
+
     components: {
         'multiselect': multiselect
     },
     data () {
         return {
-            value: [
-                { name: 'тег', code: 'tag' }
-            ],
+            selectLabel: "Нажмите Enter чтобы выбрать",
+            value: [],
             options: [
                 { name: 'Мальдивы', code: 'maldivy' },
                 { name: 'Музей', code: 'musei' },
                 { name: 'Выставка', code: 'vystavka' }
-            ]
+            ],
         }
     },
     methods: {
