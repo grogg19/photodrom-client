@@ -11,6 +11,8 @@ class Tag extends Model
 
     protected $fillable = ['name'];
 
+    protected static $tags = ['tags'];
+
     public function photos()
     {
         return $this->morphedByMany(Photo::class, 'taggable');
@@ -22,13 +24,5 @@ class Tag extends Model
     public function getRouteKeyName()
     {
         return 'name';
-    }
-
-    /**
-     * @return mixed
-     */
-    public static function tagsCloud()
-    {
-        return (new static())->has('photos')->get();
     }
 }
