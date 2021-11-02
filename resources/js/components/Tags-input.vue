@@ -1,7 +1,16 @@
 <template>
     <div class="tags-list">
         <label class="typo__label">Теги</label>
-        <multiselect v-model="value" tag-placeholder="Добавить тег" placeholder="Найти или добавить тег" label="name" track-by="code" :options="options" :multiple="true" :taggable="true" :hideSelected="true" @tag="addTag" :selectLabel="selectLabel"></multiselect>
+        <multiselect v-model="value" tag-placeholder="Добавить тег" placeholder="Найти или добавить тег" label="name" track-by="code"
+                     :options="options"
+                     :multiple="true"
+                     :taggable="true"
+                     :hideSelected="true"
+                     @tag="addTag"
+                     :selectLabel="selectLabel"
+                     :deselectLabel="deselectLabel"
+                     @search-change="getSuitableTags">
+        </multiselect>
     </div>
 </template>
 
@@ -16,12 +25,13 @@ export default {
     components: {
         'multiselect': multiselect
     },
+
     data () {
         return {
             selectLabel: "Нажмите Enter чтобы выбрать",
+            deselectLabel: "Нажмите Enter чтобы удалить",
             value: [],
             options: this.tags,
-            //options: []
         }
     },
     methods: {
@@ -32,7 +42,23 @@ export default {
             }
             this.options.push(tag)
             this.value.push(tag)
+        },
+        getSuitableTags (tagPart) {
+            axios({
+                method: 'get',
+                url: '/search-by-tags',
+                params: {
+                    part_tag: tagPart
+                }
+            }).then((response) => {
+                this.options = response.data
+            })
+        },
+
+        send() {
+            this.submit()
         }
+
     }
 }
 </script>

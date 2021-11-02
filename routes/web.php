@@ -5,7 +5,7 @@ use App\Http\Controllers\Pub\TagsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PhotosController::class, 'index'])->name('index');
-Route::get('/search-by-tags', [TagsController::class, 'index'])->name('tags.searchByTags');
+Route::get('/search-by-tags', [TagsController::class, 'getSuitableTags'])->name('tags.searchByTags');
 
 Route::get('/albums/{year}/{month}/thumbnails/big/{name}', [PhotosController::class, 'showThumb']);
 Route::get('/albums/{year}/{month}/thumbnails/small/{name}', [PhotosController::class, 'showSmall']);
