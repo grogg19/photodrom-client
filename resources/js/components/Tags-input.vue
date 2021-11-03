@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <div class="tags-list">
+        <label class="typo__label">Теги</label>
         <vue-tags-input
             v-model="tag"
             :tags="tags"
@@ -48,7 +49,7 @@ export default {
                         return { text: a.name };
                     });
                 }).catch(() => console.warn('Упс! Что-то пошло не так.'));
-            }, 200);
+            }, 50);
         },
     },
 };
