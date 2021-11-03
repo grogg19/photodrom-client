@@ -1,79 +1,51 @@
 <template>
-    <div class="tags-list">
-        <label class="typo__label">Теги</label>
-        <multiselect v-model="value" tag-placeholder="Добавить тег" placeholder="Найти или добавить тег" label="name" track-by="code"
-                     :options="options"
-                     :multiple="true"
-                     :taggable="true"
-                     :hideSelected="true"
-                     :selectLabel="selectLabel"
-                     :deselectLabel="deselectLabel"
-                     @search-change="getSuitableTags"
-        >
-        </multiselect>
+    <div>
+        <vue-tags-input
+            v-model="tag"
+            :tags="tags"
+            :autocomplete-items="autocompleteItems"
+            :add-only-from-autocomplete="true"
+            @tags-changed="update"
+        />
     </div>
 </template>
 
 <script>
-
-import multiselect from 'vue-multiselect'
+import VueTagsInput from '@johmun/vue-tags-input';
 
 export default {
-
-    props: ['tags'],
-
     components: {
-        'multiselect': multiselect
+        VueTagsInput,
     },
-
-    data () {
+    data() {
         return {
-            selectLabel: "Нажмите Enter чтобы выбрать",
-            deselectLabel: "Нажмите Enter чтобы удалить",
-            value: [],
-            options: this.tags,
-            defaultTags: this.tags,
-        }
+            tag: '',
+            tags: [],
+            autocompleteItems: [],
+            debounce: null,
+        };
+    },
+    watch: {
+        'tag': 'initItems',
     },
     methods: {
-        // addTag(newTag) {
-        //     const tag = {
-        //         name: newTag,
-        //         code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
-        //     }
-        //     this.options.push(tag)
-        //     this.value.push(tag)
-        // },
-        getSuitableTags(tagPart) {
-            axios({
-                method: 'get',
-                url: '/search-by-tags',
-                params: {
-                    part_tag: tagPart
-                }
-            }).then((response) => {
-                if (response.data.length > 0) {
-                    console.log(response.data)
-                    this.options = response.data
-                }
-            })
+        update(newTags) {
+            this.autocompleteItems = [];
+            this.tags = newTags;
         },
+        initItems() {
+            //if (this.tag.length < 2) return;
+            const url = '/search-tags';
 
-    }
-}
+            clearTimeout(this.debounce);
+            this.debounce = setTimeout(() => {
+                axios.get(url).then(response => {
+                    this.autocompleteItems = response.data.results.map(a => {
+                        return { text: a.name };
+                    });
+                }).catch(() => console.warn('Упс! Что-то пошло не так.'));
+            }, 600);
+        },
+    },
+};
 </script>
-
-<!-- New step!
-     Add Multiselect CSS. Can be added as a static asset or inside a component. -->
-<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
-
-<style>
-
-.tags-list {
-    margin: 10px 0 10px 0;
-}
-
-.typo__label {
-    color: #95999c;
-}
-</style>
