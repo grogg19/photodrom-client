@@ -40,7 +40,12 @@ class TagsController extends Controller
     {
         $partTag = $request->get('part_tag');
 
+        /** @var Collection $listTags */
         $listTags = $this->tagRepository->searchTagsByPart($partTag);
+
+        if ($listTags->isEmpty()) {
+            $listTags = $this->tagRepository->tagsCloud();
+        }
 
         return $listTags->toJson();
         //return response()->json($listTags);

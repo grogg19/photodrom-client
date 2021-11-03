@@ -6,10 +6,10 @@
                      :multiple="true"
                      :taggable="true"
                      :hideSelected="true"
-                     @tag="addTag"
                      :selectLabel="selectLabel"
                      :deselectLabel="deselectLabel"
-                     @search-change="getSuitableTags">
+                     @search-change="getSuitableTags"
+        >
         </multiselect>
     </div>
 </template>
@@ -32,18 +32,19 @@ export default {
             deselectLabel: "Нажмите Enter чтобы удалить",
             value: [],
             options: this.tags,
+            defaultTags: this.tags,
         }
     },
     methods: {
-        addTag (newTag) {
-            const tag = {
-                name: newTag,
-                code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
-            }
-            this.options.push(tag)
-            this.value.push(tag)
-        },
-        getSuitableTags (tagPart) {
+        // addTag(newTag) {
+        //     const tag = {
+        //         name: newTag,
+        //         code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
+        //     }
+        //     this.options.push(tag)
+        //     this.value.push(tag)
+        // },
+        getSuitableTags(tagPart) {
             axios({
                 method: 'get',
                 url: '/search-by-tags',
@@ -51,13 +52,12 @@ export default {
                     part_tag: tagPart
                 }
             }).then((response) => {
-                this.options = response.data
+                if (response.data.length > 0) {
+                    console.log(response.data)
+                    this.options = response.data
+                }
             })
         },
-
-        send() {
-            this.submit()
-        }
 
     }
 }
