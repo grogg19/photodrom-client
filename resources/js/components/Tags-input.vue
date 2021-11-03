@@ -35,16 +35,20 @@ export default {
         },
         initItems() {
             //if (this.tag.length < 2) return;
-            const url = '/search-tags';
-
             clearTimeout(this.debounce);
             this.debounce = setTimeout(() => {
-                axios.get(url).then(response => {
-                    this.autocompleteItems = response.data.results.map(a => {
+                axios({
+                    method: 'get',
+                    url: '/search-tags',
+                    params: {
+                        part_tag: this.tag
+                    }
+                }).then(response => {
+                    this.autocompleteItems = response.data.map(a => {
                         return { text: a.name };
                     });
                 }).catch(() => console.warn('Упс! Что-то пошло не так.'));
-            }, 600);
+            }, 200);
         },
     },
 };
