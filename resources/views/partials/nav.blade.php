@@ -1,6 +1,6 @@
 <nav class="menu">
     <ul class="navigate-menu">
-        <li><a class="active drop-link" href="{{ route('index') }}">Каталог фотографий</a></li>
+        <li><a class="active" href="{{ route('index') }}">Каталог фотографий</a></li>
         <li><a class="drop-link" href="#">About</a>
             <ul class="second-level">
                 <li><a href="#" class="back-main-menu"><i class="fa fa-exchange"></i></a></li>

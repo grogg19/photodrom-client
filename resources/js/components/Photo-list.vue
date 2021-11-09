@@ -33,8 +33,6 @@ export default {
         imagesLoaded,
     },
 
-
-
     data() {
         return {
             selected: null,
@@ -61,6 +59,12 @@ export default {
                 this.infiniteHandler()
             }
         };
+
+        this.$root.$on('receivePhotos',  (photos) => {
+            this.images = photos.data
+            this.nextPage = photos.next_page_url
+            this.popUpUpdate()
+        })
     },
 
     methods: {
@@ -91,6 +95,7 @@ export default {
         scroll() {
 
         },
+
         layout () {
             this.$refs.cpt.layout('masonry');
         },

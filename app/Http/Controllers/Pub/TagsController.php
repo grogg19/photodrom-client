@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Pub;
 
 use App\Http\Controllers\Controller;
+use App\Models\Photo;
 use App\Models\Tag;
 use App\Repositories\Interfaces\TagRepositoryInterface;
 use Illuminate\Http\Request;
@@ -12,24 +13,12 @@ class TagsController extends Controller
 {
     protected $tagRepository;
 
+    /**
+     * @param TagRepositoryInterface $tagRepository
+     */
     public function __construct(TagRepositoryInterface $tagRepository)
     {
         $this->tagRepository = $tagRepository;
-    }
-
-    public function index(Collection $tags, Request $request)
-    {
-        $currentPage = $request->get('page') ?: 1;
-
-        $listPhotos = Tag::whereIn('slug', $tags)
-            ->with(['photos'])
-            ->paginate(50, '*', 'page', $currentPage);
-
-        if($currentPage > 1) {
-            return response()->json($listPhotos);
-        }
-
-        return view('photos', compact('listPhotos'));
     }
 
     /**
@@ -43,12 +32,11 @@ class TagsController extends Controller
         /** @var Collection $listTags */
         $listTags = $this->tagRepository->searchTagsByPart($partTag);
 
-        if ($listTags->isEmpty()) {
-            $listTags = $this->tagRepository->tagsCloud();
-        }
+//        if ($listTags->isEmpty()) {
+//            $listTags = $this->tagRepository->tagsCloud();
+//        }
 
         return $listTags->toJson();
-        //return response()->json($listTags);
-
     }
+
 }

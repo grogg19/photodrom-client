@@ -2,8 +2,10 @@
 
 namespace App\Repositories;
 
+use App\Models\Photo;
 use App\Models\Tag;
 use App\Repositories\Interfaces\TagRepositoryInterface;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
 class TagRepository implements TagRepositoryInterface
@@ -35,4 +37,5 @@ class TagRepository implements TagRepositoryInterface
             ->take(7)
             ->get();
     }
+
 }
