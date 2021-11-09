@@ -2,9 +2,9 @@
 
 namespace App\Repositories\Interfaces;
 
-use Illuminate\Support\Collection;
-
 interface PhotoRepositoryInterface
 {
     public function getListPhotos();
+
+    public function getListPhotosByTags(array $tags);
 }

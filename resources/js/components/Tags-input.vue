@@ -1,13 +1,16 @@
 <template>
     <div class="tags-list">
         <label class="typo__label">Теги</label>
-        <vue-tags-input
-            v-model="tag"
-            :tags="tags"
-            :autocomplete-items="autocompleteItems"
-            :add-only-from-autocomplete="true"
-            @tags-changed="update"
-        />
+        <div class="tags-block" @keydown.enter="send">
+            <vue-tags-input
+                v-model="tag"
+                :tags="tags"
+                :autocomplete-items="autocompleteItems"
+                :add-only-from-autocomplete="true"
+                :placeholder="placeholder"
+                @tags-changed="update"
+            />
+        </div>
     </div>
 </template>
 
@@ -24,33 +27,78 @@ export default {
             tags: [],
             autocompleteItems: [],
             debounce: null,
+            placeholder: 'Добавить тег',
+            tagsSlugs: []
         };
     },
     watch: {
         'tag': 'initItems',
     },
+    mounted() {
+
+    },
+
     methods: {
         update(newTags) {
             this.autocompleteItems = [];
             this.tags = newTags;
         },
         initItems() {
-            //if (this.tag.length < 2) return;
+            if (this.tag === "") return;
+
             clearTimeout(this.debounce);
+
             this.debounce = setTimeout(() => {
-                axios({
-                    method: 'get',
-                    url: '/search-tags',
-                    params: {
-                        part_tag: this.tag
-                    }
-                }).then(response => {
-                    this.autocompleteItems = response.data.map(a => {
-                        return { text: a.name };
-                    });
-                }).catch(() => console.warn('Упс! Что-то пошло не так.'));
+
+                    axios({
+                        method: 'get',
+                        url: '/search-tags',
+                        params: {
+                            part_tag: this.tag
+                        }
+                    }).then(response => {
+                        this.autocompleteItems = response.data.map(a => {
+                            return {
+                                text: a.name,
+                                slug: a.slug,
+                            };
+                        });
+                    }).catch(() => console.warn('Упс! Что-то пошло не так.'));
+
             }, 50);
+        },
+        send() {
+            if (this.tags.length === 0) {
+                return
+            }
+            if (this.tag.length === 0) {
+                axios({
+                    method: 'post',
+                    url: '/photos-by-tags',
+                    data: {
+                        tags: this.tags.map(a => {
+                            return a.slug
+                        })
+                    }
+                }).then((response) => {
+                    this.$root.$emit('receivePhotos', response.data);
+                });
+            } else {
+                return
+            }
+
         },
     },
 };
+
 </script>
+<style>
+
+.tags-list {
+    margin: 20px 0 20px 0;
+}
+
+.typo__label {
+    color: #95999c;
+}
+</style>

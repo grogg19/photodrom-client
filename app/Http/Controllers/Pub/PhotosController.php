@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Pub;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\Interfaces\PhotoRepositoryInterface;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class PhotosController extends Controller
 {
@@ -30,26 +30,58 @@ class PhotosController extends Controller
     {
         $currentPage = $request->get('page') ?: 1;
 
-        /** @var LengthAwarePaginator $listPhotos */
         $listPhotos = $this->photoRepository->getListPhotos($currentPage, 50);
 
-        if($currentPage > 1) {
+        if ($currentPage > 1) {
             return response()->json($listPhotos);
         }
 
         return view('photos', compact('listPhotos'));
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getListPhotosByTags(Request $request): JsonResponse
+    {
+        $currentPage = $request->get('page') ?: 1;
+
+        $tags = ($request->post('tags')) ?: [];
+
+        $listPhotos =  $this->photoRepository->getListPhotosByTags($tags, $currentPage, 50);
+
+        return response()->json($listPhotos);
+    }
+
+    /**
+     * @param $year
+     * @param $month
+     * @param $name
+     * @return false|int
+     */
     public function showThumb($year,$month,$name) {
         header('Content-type:image/jpeg');
         return readfile("/media/hdd/albums/".$year."/".$month."/thumbnails/big/".$name);
     }
 
+    /**
+     * @param $year
+     * @param $month
+     * @param $name
+     * @return false|int
+     */
     public function showOriginal($year,$month,$name) {
         header('Content-type:image/jpeg');
         return readfile("/media/hdd/albums/".$year."/".$month."/original/".$name);
     }
 
+    /**
+     * @param $year
+     * @param $month
+     * @param $name
+     * @return false|int
+     */
     public function showSmall($year,$month,$name) {
         header('Content-type:image/jpeg');
         return readfile("/media/hdd/albums/".$year."/".$month."/thumbnails/small/".$name);
