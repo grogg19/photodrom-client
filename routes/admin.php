@@ -9,6 +9,6 @@ Route::middleware('auth')->group( function () {
         return view('dashboard');
     })->middleware(['auth'])->name('settings')->prefix('manager');
 
-    Route::get('/manage-photos', PhotosController::class)->name('manage-photos')->prefix('manager');
+    Route::get('/manage-photos', [PhotosController::class, 'index'])->name('manage-photos')->prefix('manager');
     Route::get('/manage-settings', function () {})->name('manage-settings')->prefix('manager');
 });
