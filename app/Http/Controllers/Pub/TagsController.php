@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Pub;
 
 use App\Http\Controllers\Controller;
-use App\Models\Photo;
-use App\Models\Tag;
 use App\Repositories\Interfaces\TagRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;

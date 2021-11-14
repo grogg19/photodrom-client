@@ -79,5 +79,6 @@
 
 .card-body {
     background-color: #cdcdcd;
-    border-radius: 10px;
+    border-radius: 8px;
+    height: 100%;
 }

@@ -81,7 +81,7 @@ export default {
                         })
                     }
                 }).then((response) => {
-                    this.$root.$emit('receivePhotos', response.data);
+                    this.$root.$emit('receivePhotosByTags', response.data);
                 });
             } else {
                 return

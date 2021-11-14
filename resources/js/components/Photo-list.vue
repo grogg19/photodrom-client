@@ -60,10 +60,11 @@ export default {
             }
         };
 
-        this.$root.$on('receivePhotos',  (photos) => {
+        this.$root.$on('receivePhotosByTags',  (photos) => {
             this.images = photos.data
             this.nextPage = photos.next_page_url
             this.popUpUpdate()
+            window.scrollTo(0, top)
         })
     },
 

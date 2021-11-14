@@ -1,6 +1,6 @@
 <header class="clearfix left-style">
 
-    <a class="navbar-brand" href="index.html">
+    <a class="navbar-brand" href="{{ route('index') }}">
         <img src="images/logo2.png" alt="">
     </a>
 
