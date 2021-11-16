@@ -9,6 +9,7 @@ class PhotosController extends Controller
 {
     public function index()
     {
-        return view('user.list_photos', []);
+        $photos = [];
+        return view('user.list_photos', compact("photos"));
     }
 }

@@ -4,7 +4,10 @@ namespace Database\Seeders;
 
 use App\Models\Photo;
 use App\Models\Tag;
+use FilesystemIterator;
 use Illuminate\Database\Seeder;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Storage;
 
 class PhotoSeeder extends Seeder
 {
@@ -15,6 +18,12 @@ class PhotoSeeder extends Seeder
      */
     public function run()
     {
+        $rootDirectory = config('photos.directoryOriginal');
+
+        if (is_dir($rootDirectory)) {
+            (new Filesystem)->cleanDirectory($rootDirectory);
+        }
+
         $tags = Tag::factory()->count(20)->create();
 
         Photo::factory()

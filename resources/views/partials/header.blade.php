@@ -1,7 +1,7 @@
 <header class="clearfix left-style">
 
     <a class="navbar-brand" href="{{ route('index') }}">
-        <img src="images/logo2.png" alt="">
+        <img src="{{ asset('images/logo2.png') }}" alt="">
     </a>
 
     <a class="open-close-leftmenu" href="#">
