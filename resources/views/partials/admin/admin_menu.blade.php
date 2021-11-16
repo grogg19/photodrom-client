@@ -1,3 +1,3 @@
 <ul class="filter">
-    <li><a class="active" href="{{ route('settings') }}">Настройки</a></li>
+    <li><a class="active" href="{{ route('admin.settings') }}">Настройки</a></li>
 </ul>

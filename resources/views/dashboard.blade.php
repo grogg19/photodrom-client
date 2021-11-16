@@ -15,14 +15,14 @@
                     <div class="card-body">
                         <h5 class="card-title">Управление фотографиями</h5>
                         <h6 class="card-subtitle mb-2 text-muted">Добавление, редактирование, удаление фотографий</h6>
-                        <a href="{{ route('manage-photos') }}" class="card-link">Управление</a>
+                        <a href="{{ route('admin.manage-photos') }}" class="card-link">Управление</a>
                     </div>
                 </div>
                 <div class="card d-flex flex-row align-items-center m-3" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">Настройки</h5>
                         <h6 class="card-subtitle mb-2 text-muted">Настройки системы</h6>
-                        <a href="{{ route('manage-settings') }}" class="card-link">Управление</a>
+                        <a href="{{ route('admin.manage-settings') }}" class="card-link">Управление</a>
                     </div>
                 </div>
             </div>
