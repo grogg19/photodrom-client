@@ -3,16 +3,25 @@
         <!--  class types: latest random popular oldest -->
         <div class="photo-post latest random post-gal" v-for="photo in images" :key="photo.id">
             <img v-bind:src="'/albums' + changeStr(photo.url) + photo.file_name" alt="">
-            <a class="hover-box image-popup" v-bind:href="'/albums' + changeStrToBig(photo.url) + photo.file_name">
+            <a class="hover-box image-popup px-2" v-bind:href="'/albums' + changeStrToBig(photo.url) + photo.file_name">
+<!--                <div class="text-left">-->
+<!--                    <input class="form-check-input check-add-tag" type="checkbox"  v-bind:id="'checkAddTag-' + photo.id"  value="" >-->
+<!--                </div>-->
                 <h2>{{ photo.photo_name }}</h2>
-                <p><i class="fas fa-clock"></i> {{ photo.date_exif}}</p>
-                <ul class="mt-5 list-inline">
+            </a>
+            <div class="add-tag-button" @click="showMessage">
+                <i class="fas fa-plus"></i> Тег
+            </div>
+            <div style="position: absolute; z-index: 10; top: 60px; left: 30px;">
+                <ul class="list-inline">
                     <li v-for="tag in photo.tags" class="list-inline-item">
                         <a v-bind:href="'/tag/' + tag.slug ">#{{ tag.name }}</a>
                     </li>
+                    <li>
+                        <i class="fas fa-clock"></i> {{ photo.date_exif}}
+                    </li>
                 </ul>
-                <div>Extended version</div>
-            </a>
+            </div>
         </div>
     </isotope>
 </template>
@@ -109,7 +118,32 @@ export default {
                     enabled: true
                 }
             });
+        },
+
+        showMessage() {
+            alert('Тут будет модальное окно для добавления тегов')
         }
     }
 }
 </script>
+<style>
+.add-tag-button {
+    position: absolute;
+    z-index: 10;
+    top: 30px;
+    left: 30px;
+    background-color: rgba(252, 189, 108, 0.6);
+    border-radius: 5px;
+    padding: 0 10px 0 10px;
+    cursor: pointer;
+    -webkit-transition: .3s ease-in-out;
+    -moz-transition: .3s ease-in-out;
+    -o-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
+
+.add-tag-button:hover {
+    background-color: rgba(245, 182, 102, 1);
+    color: #7e1a1a;
+}
+</style>

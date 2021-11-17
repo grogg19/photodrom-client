@@ -9,6 +9,8 @@
                 <li><a href="about-us.html">About Us</a></li>
             </ul>
         </li>
-        <li><a href="contact.html">Contact</a></li>
+        @auth()
+        <li><a href="{{ route('admin.settings') }}">Личный кабинет</a></li>
+        @endauth
     </ul>
 </nav>
