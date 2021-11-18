@@ -9,7 +9,7 @@
 <!--                </div>-->
                 <h2>{{ photo.photo_name }}</h2>
             </a>
-            <div class="add-tag-button" @click="showMessage">
+            <div class="add-tag-button" @click="showModal">
                 <i class="fas fa-plus"></i> Тег
             </div>
             <div style="position: absolute; z-index: 10; top: 60px; left: 30px;">
@@ -122,6 +122,10 @@ export default {
 
         showMessage() {
             alert('Тут будет модальное окно для добавления тегов')
+        },
+
+        showModal: function () {
+            this.$root.$refs.modal.show = true
         }
     }
 }
