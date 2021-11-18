@@ -1,11 +1,5 @@
 const mix = require('laravel-mix');
 
-mix.webpackConfig({
-    externals: {
-        'vue':'Vue',
-    }
-});
-
 
 /*
  |--------------------------------------------------------------------------
@@ -19,7 +13,6 @@ mix.webpackConfig({
  */
 
 mix.js('resources/js/app.js', 'public/js').vue()
-    .js('resources/js/vue.js', 'public/js')
     .js('resources/js/bootstrap.js', 'public/js')
     .js('resources/js/vue-components.js', 'public/js')
     .sass('resources/scss/style.scss', 'public/css')
