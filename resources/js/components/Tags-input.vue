@@ -60,7 +60,6 @@ export default {
                         this.autocompleteItems = response.data.map(a => {
                             return {
                                 text: a.name,
-                                slug: a.slug,
                             };
                         });
                     }).catch(() => console.warn('Упс! Что-то пошло не так.'));
@@ -77,7 +76,7 @@ export default {
                     url: '/photos-by-tags',
                     data: {
                         tags: this.tags.map(a => {
-                            return a.slug
+                            return a.text
                         })
                     }
                 }).then((response) => {

@@ -32,7 +32,7 @@ class TagRepository implements TagRepositoryInterface
     {
         return Tag::has('photos')
             ->where('name', 'like', $partTag . '%')
-            ->select('name', 'slug')
+            ->select('name')
             ->withCount('photos')
             ->take(7)
             ->get();

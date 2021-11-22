@@ -24,7 +24,6 @@ class TagFactory extends Factory
     {
         return [
             'name' => $name = Str::ucfirst($this->faker->unique()->word()),
-            'slug' => Str::slug($name)
         ];
     }
 }
