@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\Pub;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Photos\StorePhotoRequest;
+use App\Http\Requests\Tags\TagRequest;
+use App\Models\Photo;
 use App\Repositories\Interfaces\PhotoRepositoryInterface;
+use App\Services\PhotoStore;
+use App\Services\TagsSynchronizer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -52,6 +57,21 @@ class PhotosController extends Controller
         $listPhotos =  $this->photoRepository->getListPhotosByTags($tags, $currentPage, 50);
 
         return response()->json($listPhotos);
+    }
+
+    /**
+     * @param StorePhotoRequest $request
+     * @param Photo $photo
+     * @param TagsSynchronizer $tagsSynchronizer
+     * @param TagRequest $tagsRequest
+     * @param PhotoStore $photoStore
+     * @return JsonResponse
+     */
+    public function updatePhotoTags(StorePhotoRequest $request, Photo $photo, TagsSynchronizer $tagsSynchronizer, TagRequest $tagsRequest, PhotoStore $photoStore): JsonResponse
+    {
+        $photoStore->updatePhotoTags($request, $tagsSynchronizer, $tagsRequest, $photo);
+
+        return response()->json($photo->tags);
     }
 
     /**

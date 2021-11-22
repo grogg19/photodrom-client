@@ -21,6 +21,48 @@
     </div>
 </template>
 
+<script>
+export default {
+
+    name: "ModalWindow",
+
+    data: function () {
+        return {
+            show: false,
+            photo_id: 0
+        }
+    },
+    methods: {
+        closeModal: function () {
+            this.show = false
+        },
+
+        send() {
+            console.log('id: ' + this.photo_id)
+            if (this.$refs.addTags.tags.length > 0) {
+                axios({
+                    method: 'post',
+                    url: '/updatePhotoTags/' + this.photo_id,
+                    data: {
+                        _method: 'patch',
+                        tags: this.$refs.addTags.tags.map(a => {
+                            return a.text
+                        })
+                    },
+                }).then((response) => {
+                    console.log('Успех');
+                    console.log(response.data);
+                })
+                    .catch(error => {
+                        console.log(error);
+                    })
+            }
+            this.closeModal()
+        }
+    }
+}
+</script>
+
 <style scoped lang="scss">
 .modal-shadow {
     position: fixed;
@@ -83,24 +125,3 @@
     }
 }
 </style>
-
-<script>
-export default {
-    name: "ModalWindow",
-    data: function () {
-        return {
-            show: false
-        }
-    },
-    methods: {
-        closeModal: function () {
-            this.show = false
-        },
-
-        send() {
-            console.log(this.$refs.addTags.tags)
-            this.closeModal()
-        }
-    }
-}
-</script>
