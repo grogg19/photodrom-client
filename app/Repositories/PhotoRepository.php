@@ -19,9 +19,18 @@ class PhotoRepository implements PhotoRepositoryInterface
     public function getListPhotosByTags(array $tags, $currentPage = 1, int $perPage = 20): LengthAwarePaginator
     {
         return Photo::whereHas('tags', function ($query) use ($tags) {
-            $query->whereIn('slug', $tags);
+            $query->whereIn('name', $tags);
         })
             ->with('tags')
             ->paginate($perPage, '*', 'page', $currentPage);
+    }
+
+    /**
+     * @param Photo $photo
+     * @param array $attributes
+     */
+    public function updatePhoto(Photo $photo, array $attributes)
+    {
+        $photo->update($attributes);
     }
 }

@@ -8,7 +8,7 @@
                 <p><i class="fas fa-clock"></i> {{ photo.date_exif}}</p>
                 <ul class="mt-5 list-inline">
                     <li v-for="tag in photo.tags" class="list-inline-item">
-                        <a v-bind:href="'/tag/' + tag.slug ">#{{ tag.name }}</a>
+                        <a v-bind:href="'/tag/' + tag.name ">#{{ tag.name }}</a>
                     </li>
                 </ul>
             </a>

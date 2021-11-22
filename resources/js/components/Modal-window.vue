@@ -7,7 +7,7 @@
             </slot>
             <slot name="body">
                 <div class="modal-window-content">
-                    <tags-add></tags-add>
+                    <tags-add ref="addTags"></tags-add>
                 </div>
             </slot>
             <slot name="footer">
@@ -98,7 +98,7 @@ export default {
         },
 
         send() {
-            alert('test')
+            console.log(this.$refs.addTags.tags)
             this.closeModal()
         }
     }

@@ -27,7 +27,6 @@ export default {
             autocompleteItems: [],
             debounce: null,
             placeholder: 'Добавить тег',
-            tagsSlugs: []
         };
     },
     watch: {
@@ -67,7 +66,6 @@ export default {
                         this.autocompleteItems = response.data.map(a => {
                             return {
                                 text: a.name,
-                                slug: a.slug,
                             };
                         });
                     }).catch(() => console.warn('Упс! Что-то пошло не так.'));

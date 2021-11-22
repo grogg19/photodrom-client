@@ -15,7 +15,7 @@
             <div style="position: absolute; z-index: 10; top: 60px; left: 30px;">
                 <ul class="list-inline">
                     <li v-for="tag in photo.tags" class="list-inline-item">
-                        <a v-bind:href="'/tag/' + tag.slug ">#{{ tag.name }}</a>
+                        <a v-bind:href="'/tag/' + tag.name ">#{{ tag.name }}</a>
                     </li>
                     <li>
                         <i class="fas fa-clock"></i> {{ photo.date_exif}}
