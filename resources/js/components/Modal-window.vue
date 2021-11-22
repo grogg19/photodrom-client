@@ -1,18 +1,18 @@
 <template>
     <div v-if="show" class="modal-shadow" @click.self="closeModal">
-        <div class="modal">
-            <div class="modal-close" @click="closeModal">&#10006;</div>
+        <div class="modal-window">
+            <div class="modal-window-close" @click="closeModal">&#10006;</div>
             <slot name="title">
-                <h3 class="modal-title">Заголовок</h3>
+                <h3 class="modal-window-title">Добавить новые теги</h3>
             </slot>
             <slot name="body">
-                <div class="modal-content">
-                    Дефолтный контент модального окна
+                <div class="modal-window-content">
+                    <tags-add></tags-add>
                 </div>
             </slot>
             <slot name="footer">
-                <div class="modal-footer">
-                    <button class="modal-footer__button" @click="closeModal">
+                <div class="modal-window-footer">
+                    <button class="modal-window-footer__button" @click="send">
                         Ок
                     </button>
                 </div>
@@ -21,24 +21,7 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: "ModalWindow",
-    data: function () {
-        return {
-            show: false
-        }
-    },
-    methods: {
-        closeModal: function () {
-            this.show = false
-        }
-    }
-}
-</script>
-
-<style scoped
-       lang="scss">
+<style scoped lang="scss">
 .modal-shadow {
     position: fixed;
     top: 0;
@@ -46,19 +29,21 @@ export default {
     min-height: 100%;
     width: 100%;
     background: rgba(0, 0, 0, 0.39);
-    z-index: 100;
+    z-index: 99999;
 }
 
-.modal {
+.modal-window {
     background: #fff;
     border-radius: 8px;
     padding: 15px;
     min-width: 420px;
     max-width: 480px;
-    position: fixed;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 999999;
+    display: block;
 
     &-close {
         border-radius: 50%;
@@ -98,3 +83,24 @@ export default {
     }
 }
 </style>
+
+<script>
+export default {
+    name: "ModalWindow",
+    data: function () {
+        return {
+            show: false
+        }
+    },
+    methods: {
+        closeModal: function () {
+            this.show = false
+        },
+
+        send() {
+            alert('test')
+            this.closeModal()
+        }
+    }
+}
+</script>
