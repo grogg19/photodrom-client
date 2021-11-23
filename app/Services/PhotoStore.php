@@ -13,11 +13,11 @@ class PhotoStore
      * @param TagsSynchronizer $tagsSynchronizer
      * @param TagRequest $tagsRequest
      * @param HasTags $photo
+     * @return HasTags
      */
     public function updatePhotoTags(StorePhotoRequest $request, TagsSynchronizer $tagsSynchronizer, TagRequest $tagsRequest, HasTags $photo)
     {
         $tags = $tagsRequest->getTags($request);
-
         $tagsSynchronizer->syncWithoutDetaching($tags, $photo);
     }
 }

@@ -71,7 +71,7 @@ class PhotosController extends Controller
     {
         $photoStore->updatePhotoTags($request, $tagsSynchronizer, $tagsRequest, $photo);
 
-        return response()->json($photo->tags);
+        return response()->json($photo->fresh()->tags);
     }
 
     /**

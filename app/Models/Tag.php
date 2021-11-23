@@ -11,8 +11,6 @@ class Tag extends Model
 
     protected $fillable = ['name'];
 
-    protected static $tags = ['tags'];
-
     public function photos()
     {
         return $this->morphedByMany(Photo::class, 'taggable');
