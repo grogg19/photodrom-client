@@ -13,14 +13,14 @@
                 <i class="fas fa-plus"></i> Тег
             </div>
             <div style="position: absolute; z-index: 10; top: 60px; left: 30px;">
-                <ul class="list-inline">
+                <ul class="list-inline list-tags">
                     <li v-for="tag in photo.tags" class="list-inline-item">
-                        <a v-bind:href="'/tag/' + tag.name ">#{{ tag.name }}</a>
-                    </li>
-                    <li>
-                        <i class="fas fa-clock"></i> {{ photo.date_exif}}
+                        <a class="tag" v-bind:href="'/tag/' + tag.name ">#{{ tag.name }}</a>
                     </li>
                 </ul>
+                <div>
+                    <i class="fas fa-clock"></i> {{ photo.date_exif}}
+                </div>
             </div>
         </div>
     </isotope>
@@ -149,5 +149,18 @@ export default {
 .add-tag-button:hover {
     background-color: rgba(245, 182, 102, 1);
     color: #7e1a1a;
+}
+
+.list-tags {
+    margin: 0px 30px 10px 0px;
+    padding: 5px 5px 5px 5px;
+    background-color: rgba(200, 200, 200, 0.3);
+    line-height: 12px;
+    border-radius: 5px;
+}
+
+.tag {
+    color: #F5B666;
+    font-size: 12px;
 }
 </style>
