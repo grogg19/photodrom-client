@@ -12,8 +12,8 @@
             <div class="add-tag-button" @click="showModal(index)">
                 <i class="fas fa-plus"></i> Тег
             </div>
-            <div style="position: absolute; z-index: 10; top: 60px; left: 30px;" v-if="photo.tags.length > 0">
-                <ul class="list-inline list-tags">
+            <div class="tags-block">
+                <ul class="list-inline list-tags" v-if="photo.tags.length > 0">
                     <li v-for="tag in photo.tags" class="list-inline-item">
                         <a class="tag" v-bind:href="'/tag/' + tag.name ">#{{ tag.name }}</a>
                     </li>
@@ -162,5 +162,12 @@ export default {
 .tag {
     color: #F5B666;
     font-size: 12px;
+}
+
+.tags-block {
+    position: absolute;
+    z-index: 10;
+    top: 60px;
+    left: 30px;
 }
 </style>
