@@ -18,7 +18,7 @@
                         <a class="tag" v-bind:href="'/tag/' + tag.name ">#{{ tag.name }}</a>
                     </li>
                 </ul>
-                <div>
+                <div class="date-shot">
                     <i class="fas fa-clock"></i> {{ photo.date_exif}}
                 </div>
             </div>
@@ -169,5 +169,9 @@ export default {
     z-index: 10;
     top: 60px;
     left: 30px;
+}
+
+.date-shot {
+    font-size: 12px;
 }
 </style>
