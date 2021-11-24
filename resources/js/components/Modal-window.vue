@@ -38,11 +38,10 @@ export default {
         },
 
         send() {
-            console.log('id: ' + this.photo_id)
             if (this.$refs.addTags.tags.length > 0) {
                 axios({
                     method: 'post',
-                    url: '/updatePhotoTags/' + this.photo_id,
+                    url: '/updatePhotoTags/' + this.$root.$refs.listPhotos.images[this.photo_id].id,
                     data: {
                         _method: 'patch',
                         tags: this.$refs.addTags.tags.map(a => {
@@ -50,8 +49,7 @@ export default {
                         })
                     },
                 }).then((response) => {
-                    console.log('Успех');
-                    console.log(response.data);
+                    this.$root.$refs.listPhotos.images[this.photo_id].tags = response.data
                 })
                     .catch(error => {
                         console.log(error);

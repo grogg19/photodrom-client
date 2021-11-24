@@ -5,7 +5,7 @@
         <photo-list :photos='@json($listPhotos)'></photo-list>
     @endguest
     @auth
-        <photo-list-extended :photos='@json($listPhotos)'></photo-list-extended>
+        <photo-list-extended :photos='@json($listPhotos)' ref="listPhotos"></photo-list-extended>
         <modal-window ref="modal"></modal-window>
     @endauth
 @endsection

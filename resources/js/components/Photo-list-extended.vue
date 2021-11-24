@@ -1,7 +1,7 @@
 <template>
     <isotope class="photos-box iso-call" :list="images" :options="option" v-images-loaded:on.progress="layout" ref="cpt">
         <!--  class types: latest random popular oldest -->
-        <div class="photo-post latest random post-gal" v-for="photo in images" :key="photo.id">
+        <div class="photo-post latest random post-gal" v-for="(photo, index) in images" :key="photo.id">
             <img v-bind:src="'/albums' + changeStr(photo.url) + photo.file_name" alt="">
             <a class="hover-box image-popup px-2" v-bind:href="'/albums' + changeStrToBig(photo.url) + photo.file_name">
 <!--                <div class="text-left">-->
@@ -9,7 +9,7 @@
 <!--                </div>-->
                 <h2>{{ photo.photo_name }}</h2>
             </a>
-            <div class="add-tag-button" @click="showModal(photo.id)">
+            <div class="add-tag-button" @click="showModal(index)">
                 <i class="fas fa-plus"></i> Тег
             </div>
             <div style="position: absolute; z-index: 10; top: 60px; left: 30px;">
@@ -75,7 +75,9 @@ export default {
             this.nextPage = photos.next_page_url
             this.popUpUpdate()
             window.scrollTo(0, top)
-        })
+        });
+
+        //console.log(this.photos.data)
     },
 
     methods: {
@@ -121,12 +123,13 @@ export default {
         },
 
         showModal(photo_id) {
-            this.$root.$refs.modal.photo_id = photo_id
-            this.$root.$refs.modal.show = true
+             this.$root.$refs.modal.photo_id = photo_id
+             this.$root.$refs.modal.show = true
         }
     }
 }
 </script>
+
 <style>
 .add-tag-button {
     position: absolute;
