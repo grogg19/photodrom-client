@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PhotosController::class, 'index'])->name('index');
 Route::get('/search-tags', [TagsController::class, 'getSuitableTags'])->name('tags.searchTags');
 Route::post('/photos-by-tags/', [PhotosController::class, 'getListPhotosByTags'])->name('photos.getPhotosByTags');
+Route::get('/tag/{tag}', [PhotosController::class, 'getListPhotosByTag']);
 
 Route::patch('/updatePhotoTags/{photo}', [PhotosController::class, 'updatePhotoTags'])->name('photos.updateTagsInPhoto')
     ->middleware('auth');

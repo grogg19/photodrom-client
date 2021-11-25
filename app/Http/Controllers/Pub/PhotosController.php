@@ -9,6 +9,7 @@ use App\Models\Photo;
 use App\Repositories\Interfaces\PhotoRepositoryInterface;
 use App\Services\PhotoStore;
 use App\Services\TagsSynchronizer;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -57,6 +58,23 @@ class PhotosController extends Controller
         $listPhotos =  $this->photoRepository->getListPhotosByTags($tags, $currentPage, 50);
 
         return response()->json($listPhotos);
+    }
+
+    /**
+     * @param Request $request
+     * @param $tag
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|JsonResponse
+     */
+    public function getListPhotosByTag(Request $request, $tag)
+    {
+        $currentPage = $request->get('page') ?: 1;
+
+        $listPhotos =  $this->photoRepository->getListPhotosByTags([$tag], $currentPage, 50);
+
+        return ($currentPage > 1)
+            ? response()->json($listPhotos)
+            : view('photos', compact('listPhotos'));
+
     }
 
     /**
