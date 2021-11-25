@@ -33,9 +33,11 @@ export default {
         'tag': 'initItems',
     },
     mounted() {
-
+        this.focusInput()
     },
 
+    activated() {
+    },
     computed: {
         filteredItems() {
             return this.autocompleteItems.filter(i => {
@@ -72,6 +74,10 @@ export default {
 
             }, 50);
         },
+
+        focusInput() {
+            this.$refs.tagsInput.focus()
+        }
     },
 };
 

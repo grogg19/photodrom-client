@@ -123,8 +123,8 @@ export default {
         },
 
         showModal(photo_id) {
-             this.$root.$refs.modal.photo_id = photo_id
-             this.$root.$refs.modal.show = true
+            this.$root.$refs.modal.photo_id = photo_id
+            this.$root.$refs.modal.show = true
         }
     }
 }
