@@ -3,15 +3,19 @@
         <!--  class types: latest random popular oldest -->
         <div class="photo-post latest random post-gal" v-for="photo in images" :key="photo.id">
             <img v-bind:src="'/albums' + changeStr(photo.url) + photo.file_name" alt="">
-            <a class="hover-box image-popup" v-bind:href="'/albums' + changeStrToBig(photo.url) + photo.file_name">
+            <a class="hover-box image-popup px-2" v-bind:href="'/albums' + changeStrToBig(photo.url) + photo.file_name">
                 <h2>{{ photo.photo_name }}</h2>
-                <p><i class="fas fa-clock"></i> {{ photo.date_exif}}</p>
-                <ul class="mt-5 list-inline">
+            </a>
+            <div class="tags-block-list">
+                <ul class="list-inline list-tags" v-if="photo.tags.length > 0">
                     <li v-for="tag in photo.tags" class="list-inline-item">
-                        <a v-bind:href="'/tag/' + tag.name ">#{{ tag.name }}</a>
+                        <a class="tag" v-bind:href="'/tag/' + tag.name ">#{{ tag.name }}</a>
                     </li>
                 </ul>
-            </a>
+                <div class="date-shot">
+                    <i class="fas fa-clock"></i> {{ photo.date_exif}}
+                </div>
+            </div>
         </div>
     </isotope>
 </template>
@@ -112,3 +116,28 @@ export default {
     }
 }
 </script>
+<style>
+.list-tags {
+    margin: 0px 30px 10px 0px;
+    padding: 5px 5px 5px 5px;
+    background-color: rgba(200, 200, 200, 0.3);
+    line-height: 12px;
+    border-radius: 5px;
+}
+
+.tag {
+    color: #F5B666;
+    font-size: 12px;
+}
+
+.tags-block-list {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 30px;
+}
+
+.date-shot {
+    font-size: 12px;
+}
+</style>
