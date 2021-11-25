@@ -12,7 +12,7 @@
             <div class="add-tag-button" @click="showModal(index)">
                 <i class="fas fa-plus"></i> Тег
             </div>
-            <div class="tags-block-list">
+            <div class="tags-block-list-extended">
                 <ul class="list-inline list-tags" v-if="photo.tags.length > 0">
                     <li v-for="tag in photo.tags" class="list-inline-item">
                         <a class="tag" v-bind:href="'/tag/' + tag.name ">#{{ tag.name }}</a>
@@ -164,7 +164,7 @@ export default {
     font-size: 12px;
 }
 
-.tags-block-list {
+.tags-block-list-extended {
     position: absolute;
     z-index: 10;
     top: 60px;

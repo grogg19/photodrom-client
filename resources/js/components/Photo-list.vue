@@ -117,27 +117,11 @@ export default {
 }
 </script>
 <style>
-.list-tags {
-    margin: 0px 30px 10px 0px;
-    padding: 5px 5px 5px 5px;
-    background-color: rgba(200, 200, 200, 0.3);
-    line-height: 12px;
-    border-radius: 5px;
-}
-
-.tag {
-    color: #F5B666;
-    font-size: 12px;
-}
 
 .tags-block-list {
     position: absolute;
     z-index: 10;
-    top: 0;
+    top: 30px;
     left: 30px;
-}
-
-.date-shot {
-    font-size: 12px;
 }
 </style>
