@@ -33,7 +33,7 @@ export default {
         'tag': 'initItems',
     },
     mounted() {
-        this.focusInput()
+
     },
 
     activated() {
@@ -74,10 +74,6 @@ export default {
 
             }, 50);
         },
-
-        focusInput() {
-            this.$refs.tagsInput.focus()
-        }
     },
 };
 

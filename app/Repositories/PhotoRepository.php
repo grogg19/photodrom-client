@@ -5,16 +5,20 @@ namespace App\Repositories;
 use App\Models\Photo;
 use App\Repositories\Interfaces\PhotoRepositoryInterface;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 class PhotoRepository implements PhotoRepositoryInterface
 {
     public function getListPhotos($currentPage = 1, int $perPage = 20): LengthAwarePaginator
     {
-        return Photo::orderBy('date_exif', 'desc')
+        $listPhotos = Photo::orderBy('date_exif', 'desc')
             ->with('tags')
-            ->paginate($perPage, '*', 'page', $currentPage);
-    }
+            ->paginate($perPage, '*', 'page', $currentPage)
+            ;
 
+        return $listPhotos->setCollection($listPhotos->keyBy('id'));
+
+    }
 
     public function getListPhotosByTags(array $tags, $currentPage = 1, int $perPage = 20): LengthAwarePaginator
     {
@@ -23,6 +27,17 @@ class PhotoRepository implements PhotoRepositoryInterface
         })
             ->with('tags')
             ->paginate($perPage, '*', 'page', $currentPage);
+    }
+
+    /**
+     * @param Collection $photos
+     * @return Collection
+     */
+    public function getListPhotosByIds(Collection $photos): Collection
+    {
+        return Photo::whereIn('id', $photos)
+            ->with('tags')
+            ->get();
     }
 
     /**

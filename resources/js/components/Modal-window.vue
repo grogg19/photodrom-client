@@ -29,34 +29,50 @@ export default {
     data: function () {
         return {
             show: false,
-            photo_id: 0
+            photos: []
         }
     },
     methods: {
         closeModal: function () {
             this.show = false
         },
-
+        //
         send() {
             if (this.$refs.addTags.tags.length > 0) {
+                let listPhotos = []
+                this.photos.forEach(
+                    (photoId, index) => {
+                        console.log(photoId +' - '+ index)
+                        listPhotos.push(
+                            photoId
+                        )
+                    }
+                )
                 axios({
                     method: 'post',
-                    url: '/updatePhotoTags/' + this.$root.$refs.listPhotos.images[this.photo_id].id,
+                    url: '/updatePhotoTags',
                     data: {
                         _method: 'patch',
                         tags: this.$refs.addTags.tags.map(a => {
                             return a.text
-                        })
+                        }),
+                        photos: listPhotos
                     },
                 }).then((response) => {
-                    this.$root.$refs.listPhotos.images[this.photo_id].tags = response.data
+                    response.data.forEach(
+                        (photo_id) => {
+                            this.$root.$refs.listPhotos.images[photo_id].tags = response.data
+                        }
+                    )
+                    //this.$root.$refs.listPhotos.images[this.photo_id].tags = response.data
+                    console.log(response.data)
                 })
                     .catch(error => {
                         console.log(error);
                     })
             }
             this.closeModal()
-        }
+        },
     }
 }
 </script>

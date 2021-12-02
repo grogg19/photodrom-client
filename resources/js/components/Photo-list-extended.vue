@@ -4,12 +4,9 @@
         <div class="photo-post latest random post-gal" v-for="(photo, index) in images" :key="photo.id">
             <img v-bind:src="'/albums' + changeStr(photo.url) + photo.file_name" alt="">
             <a class="hover-box image-popup px-2" v-bind:href="'/albums' + changeStrToBig(photo.url) + photo.file_name">
-<!--                <div class="text-left">-->
-<!--                    <input class="form-check-input check-add-tag" type="checkbox"  v-bind:id="'checkAddTag-' + photo.id"  value="" >-->
-<!--                </div>-->
                 <h2>{{ photo.photo_name }}</h2>
             </a>
-            <div class="add-tag-button" @click="showModal(index)">
+            <div class="add-tag-button" v-model="checkedPhotos" @click="showModal(index, photo.id)">
                 <i class="fas fa-plus"></i> Тег
             </div>
             <div class="tags-block-list-extended">
@@ -21,6 +18,10 @@
                 <div class="date-shot">
                     <i class="fas fa-clock"></i> {{ photo.date_exif}}
                 </div>
+            </div>
+            <div class="mark-photo" v-if="checkLayer">
+                <input type="checkbox" v-bind:value="photo.id" v-bind:id="'check-photo-' + photo.id" v-model="checkedPhotos" @change="test">
+                <label v-bind:for="'check-photo-' + photo.id"></label>
             </div>
         </div>
     </isotope>
@@ -44,6 +45,7 @@ export default {
     },
 
     data() {
+        console.log(this.photos)
         return {
             selected: null,
             images: this.photos.data,
@@ -51,8 +53,9 @@ export default {
                 //sortBy : null,
             },
             nextPage: this.photos.next_page_url,
-            workInProgress: false
-
+            workInProgress: false,
+            checkLayer: false,
+            checkedPhotos: [],
         }
     },
 
@@ -76,8 +79,6 @@ export default {
             this.popUpUpdate()
             window.scrollTo(0, top)
         });
-
-        //console.log(this.photos.data)
     },
 
     methods: {
@@ -109,7 +110,7 @@ export default {
 
         },
 
-        layout () {
+        layout() {
             this.$refs.cpt.layout('masonry');
         },
 
@@ -122,15 +123,22 @@ export default {
             });
         },
 
-        showModal(photo_id) {
-            this.$root.$refs.modal.photo_id = photo_id
+        showModal(index, photo_id) {
+            this.$root.$refs.modal.photos = new Map().set(index, photo_id)
             this.$root.$refs.modal.show = true
+        },
+
+        test() {
+            //console.log(this.)
+            //alert(this.checkedPhotos)
+            this.$root.$refs.menuHighlightsTools.photosIds = this.checkedPhotos
         }
     }
 }
 </script>
 
 <style>
+
 .add-tag-button {
     position: absolute;
     z-index: 10;
@@ -174,4 +182,60 @@ export default {
 .date-shot {
     font-size: 12px;
 }
+
+.mark-photo {
+    position: absolute;
+    z-index: 11;
+    padding: 0 10px 0 10px;
+    top: 30px;
+    right: 30px;
+    -webkit-transition: .1s ease-in-out;
+    -moz-transition: .1s ease-in-out;
+    -o-transition: .1s ease-in-out;
+    transition: .1s ease-in-out;
+}
+
+.mark-photo input[type="checkbox"] {
+    opacity: 0;
+}
+
+.mark-photo label::before,
+.mark-photo label::after {
+    font-family: "Font Awesome 5 Free";
+    content: "\f0c8";
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    color: #F5B666;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.mark-photo label:hover {
+    text-shadow: 1px 1px 2px #000000, 0 0 0.5em #F5B666;
+}
+.mark-photo label::before,
+.mark-photo label::after {
+    position: absolute;
+}
+/*Внешний блок*/
+.mark-photo label::before {
+    top: 0;
+    right: 0;
+}
+/*Галка*/
+.mark-photo label::after {
+    right: 0;
+    top: 0;
+}
+
+/*Прячем галку по умолчанию*/
+.mark-photo input[type="checkbox"] + label::after {
+    content: none;
+}
+/*Показываем галку по состоянию checked*/
+.mark-photo input[type="checkbox"]:checked + label::after {
+    content: "\f14a";
+}
+
 </style>

@@ -12,6 +12,8 @@ use App\Services\TagsSynchronizer;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 class PhotosController extends Controller
 {
@@ -30,7 +32,7 @@ class PhotosController extends Controller
 
     /**
      * @param Request $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\JsonResponse
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|JsonResponse
      */
     public function index(Request $request)
     {
@@ -38,8 +40,11 @@ class PhotosController extends Controller
 
         $listPhotos = $this->photoRepository->getListPhotos($currentPage, 50);
 
+        //$listPhotos = response()->json($listPhotos);
+
         if ($currentPage > 1) {
-            return response()->json($listPhotos);
+            //return response()->json($listPhotos);
+            return $listPhotos;
         }
 
         return view('photos', compact('listPhotos'));
@@ -75,21 +80,6 @@ class PhotosController extends Controller
             ? response()->json($listPhotos)
             : view('photos', compact('listPhotos'));
 
-    }
-
-    /**
-     * @param StorePhotoRequest $request
-     * @param Photo $photo
-     * @param TagsSynchronizer $tagsSynchronizer
-     * @param TagRequest $tagsRequest
-     * @param PhotoStore $photoStore
-     * @return JsonResponse
-     */
-    public function updatePhotoTags(StorePhotoRequest $request, Photo $photo, TagsSynchronizer $tagsSynchronizer, TagRequest $tagsRequest, PhotoStore $photoStore): JsonResponse
-    {
-        $photoStore->updatePhotoTags($request, $tagsSynchronizer, $tagsRequest, $photo);
-
-        return response()->json($photo->fresh()->tags);
     }
 
     /**

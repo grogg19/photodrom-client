@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Pub\PhotosController;
+use App\Http\Controllers\User\PhotosController as UserPhotosController;
 use App\Http\Controllers\Pub\TagsController;
 use Illuminate\Support\Facades\Route;
 
@@ -9,7 +10,7 @@ Route::get('/search-tags', [TagsController::class, 'getSuitableTags'])->name('ta
 Route::post('/photos-by-tags/', [PhotosController::class, 'getListPhotosByTags'])->name('photos.getPhotosByTags');
 Route::get('/tag/{tag}', [PhotosController::class, 'getListPhotosByTag']);
 
-Route::patch('/updatePhotoTags/{photo}', [PhotosController::class, 'updatePhotoTags'])->name('photos.updateTagsInPhoto')
+Route::patch('/updatePhotoTags', [UserPhotosController::class, 'updatePhotoTags'])->name('photos.updateTagsInPhoto')
     ->middleware('auth');
 
 Route::get('/albums/{year}/{month}/thumbnails/big/{name}', [PhotosController::class, 'showThumb']);

@@ -3,8 +3,15 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Photos\StorePhotoRequest;
+use App\Http\Requests\Tags\TagRequest;
+use App\Models\Photo;
 use App\Repositories\Interfaces\PhotoRepositoryInterface;
+use App\Services\PhotoStore;
+use App\Services\TagsSynchronizer;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 class PhotosController extends Controller
 {
@@ -31,5 +38,29 @@ class PhotosController extends Controller
         $photos = $this->photoRepository->getListPhotos($currentPage, 50);
 
         return view('user.list_photos', compact("photos"));
+    }
+
+    /**
+     * @param StorePhotoRequest $request
+     * @param TagsSynchronizer $tagsSynchronizer
+     * @param TagRequest $tagsRequest
+     * @param PhotoStore $photoStore
+     * @return JsonResponse
+     */
+    public function updatePhotoTags(StorePhotoRequest $request, TagsSynchronizer $tagsSynchronizer, TagRequest $tagsRequest, PhotoStore $photoStore): JsonResponse
+    {
+        $photosIds = collect($request->post('photos'));
+
+        dd($request->post('photos'));
+
+        if($photosIds->isEmpty()) {
+            return response()->json(['message' => 'Нет идентификаторов фотографий']);
+        }
+        /** @var Collection $photos */
+        $photos = $this->photoRepository->getListPhotosByIds($photosIds);
+
+        $photoStore->updatePhotoTags($request, $tagsSynchronizer, $tagsRequest, $photos);
+
+        return response()->json($this->photoRepository->getListPhotosByIds($photosIds));
     }
 }

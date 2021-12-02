@@ -27,7 +27,7 @@ export default {
             tags: [],
             autocompleteItems: [],
             debounce: null,
-            placeholder: 'Добавить тег',
+            placeholder: 'Введите тег',
         };
     },
     watch: {

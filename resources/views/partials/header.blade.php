@@ -9,7 +9,9 @@
         <span></span>
         <span></span>
     </a>
-
+    @auth()
+    <menu-highlights-tools ref="menuHighlightsTools"></menu-highlights-tools>
+    @endauth
     <div class="left-menu">
         @include('partials.nav')
         <ul class="social-icons">
