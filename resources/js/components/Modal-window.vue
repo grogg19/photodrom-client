@@ -39,15 +39,7 @@ export default {
         //
         send() {
             if (this.$refs.addTags.tags.length > 0) {
-                let listPhotos = []
-                this.photos.forEach(
-                    (photoId, index) => {
-                        console.log(photoId +' - '+ index)
-                        listPhotos.push(
-                            photoId
-                        )
-                    }
-                )
+
                 axios({
                     method: 'post',
                     url: '/updatePhotoTags',
@@ -56,16 +48,18 @@ export default {
                         tags: this.$refs.addTags.tags.map(a => {
                             return a.text
                         }),
-                        photos: listPhotos
+                        photos: this.photos
                     },
                 }).then((response) => {
                     response.data.forEach(
-                        (photo_id) => {
-                            this.$root.$refs.listPhotos.images[photo_id].tags = response.data
+                        (photo) => {
+                            this.$root.$refs.listPhotos.images.find(
+                                image => image.id === photo.id
+                            ).tags = photo.tags
                         }
                     )
-                    //this.$root.$refs.listPhotos.images[this.photo_id].tags = response.data
-                    console.log(response.data)
+                    this.$root.$refs.listPhotos.checkedPhotos = []
+                    this.$root.$refs.menuHighlightsTools.photosIds = []
                 })
                     .catch(error => {
                         console.log(error);

@@ -3,17 +3,9 @@
 namespace App\Http\Controllers\Pub;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Photos\StorePhotoRequest;
-use App\Http\Requests\Tags\TagRequest;
-use App\Models\Photo;
 use App\Repositories\Interfaces\PhotoRepositoryInterface;
-use App\Services\PhotoStore;
-use App\Services\TagsSynchronizer;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Collection;
 
 class PhotosController extends Controller
 {
@@ -40,11 +32,9 @@ class PhotosController extends Controller
 
         $listPhotos = $this->photoRepository->getListPhotos($currentPage, 50);
 
-        //$listPhotos = response()->json($listPhotos);
 
         if ($currentPage > 1) {
-            //return response()->json($listPhotos);
-            return $listPhotos;
+            return response()->json($listPhotos);
         }
 
         return view('photos', compact('listPhotos'));

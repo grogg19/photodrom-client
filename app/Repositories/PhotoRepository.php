@@ -11,13 +11,10 @@ class PhotoRepository implements PhotoRepositoryInterface
 {
     public function getListPhotos($currentPage = 1, int $perPage = 20): LengthAwarePaginator
     {
-        $listPhotos = Photo::orderBy('date_exif', 'desc')
+        return Photo::orderBy('date_exif', 'desc')
             ->with('tags')
             ->paginate($perPage, '*', 'page', $currentPage)
             ;
-
-        return $listPhotos->setCollection($listPhotos->keyBy('id'));
-
     }
 
     public function getListPhotosByTags(array $tags, $currentPage = 1, int $perPage = 20): LengthAwarePaginator

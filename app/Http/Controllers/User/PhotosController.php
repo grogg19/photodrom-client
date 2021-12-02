@@ -51,8 +51,6 @@ class PhotosController extends Controller
     {
         $photosIds = collect($request->post('photos'));
 
-        dd($request->post('photos'));
-
         if($photosIds->isEmpty()) {
             return response()->json(['message' => 'Нет идентификаторов фотографий']);
         }

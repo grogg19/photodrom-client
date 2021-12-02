@@ -6,7 +6,7 @@
             <a class="hover-box image-popup px-2" v-bind:href="'/albums' + changeStrToBig(photo.url) + photo.file_name">
                 <h2>{{ photo.photo_name }}</h2>
             </a>
-            <div class="add-tag-button" v-model="checkedPhotos" @click="showModal(index, photo.id)">
+            <div class="add-tag-button" v-model="checkedPhotos" @click="showModal(photo.id)">
                 <i class="fas fa-plus"></i> Тег
             </div>
             <div class="tags-block-list-extended">
@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="mark-photo" v-if="checkLayer">
-                <input type="checkbox" v-bind:value="photo.id" v-bind:id="'check-photo-' + photo.id" v-model="checkedPhotos" @change="test">
+                <input type="checkbox" v-bind:value="photo.id" v-bind:id="'check-photo-' + photo.id" v-model="checkedPhotos" @change="test(index)">
                 <label v-bind:for="'check-photo-' + photo.id"></label>
             </div>
         </div>
@@ -45,7 +45,6 @@ export default {
     },
 
     data() {
-        console.log(this.photos)
         return {
             selected: null,
             images: this.photos.data,
@@ -123,14 +122,12 @@ export default {
             });
         },
 
-        showModal(index, photo_id) {
-            this.$root.$refs.modal.photos = new Map().set(index, photo_id)
+        showModal(photo_id) {
+            this.$root.$refs.modal.photos = photo_id
             this.$root.$refs.modal.show = true
         },
 
         test() {
-            //console.log(this.)
-            //alert(this.checkedPhotos)
             this.$root.$refs.menuHighlightsTools.photosIds = this.checkedPhotos
         }
     }
