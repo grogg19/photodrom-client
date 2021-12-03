@@ -60,6 +60,7 @@ export default {
                     )
                     this.$root.$refs.listPhotos.checkedPhotos = []
                     this.$root.$refs.menuHighlightsTools.photosIds = []
+                    this.$root.$refs.menuHighlightsTools.toggleHighlightCheck()
                 })
                     .catch(error => {
                         console.log(error);
