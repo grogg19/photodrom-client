@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="mark-photo" v-if="checkLayer">
-                <input type="checkbox" v-bind:value="photo.id" v-bind:id="'check-photo-' + photo.id" v-model="checkedPhotos" @change="test(index)">
+                <input type="checkbox" v-bind:value="photo.id" v-bind:id="'check-photo-' + photo.id" v-model="checkedPhotos" @change="highlite()">
                 <label v-bind:for="'check-photo-' + photo.id"></label>
             </div>
         </div>
@@ -127,7 +127,7 @@ export default {
             this.$root.$refs.modal.show = true
         },
 
-        test() {
+        highlite() {
             this.$root.$refs.menuHighlightsTools.photosIds = this.checkedPhotos
         }
     }
