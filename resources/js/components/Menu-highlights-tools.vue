@@ -30,14 +30,18 @@ export default {
             this.isChecked = this.isChecked !== true
             this.$root.$refs.listPhotos.checkLayer = this.isChecked
             if (!this.isChecked) {
-                this.$root.$refs.listPhotos.checkedPhotos = []
-                this.photosIds = []
+                this.unsetHighlightCheck()
             }
         },
 
         showModal() {
             this.$root.$refs.modal.photos = this.photosIds
             this.$root.$refs.modal.show = true
+        },
+
+        unsetHighlightCheck() {
+            this.$root.$refs.listPhotos.checkedPhotos = []
+            this.photosIds = []
         }
     }
 }
