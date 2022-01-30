@@ -20,7 +20,7 @@
 <div id="app">
     <!-- Header
         ================================================== -->
-    @include('partials.header')
+    @include('partials.admin.header')
     <!-- End Header -->
 
     @if (session('status'))
