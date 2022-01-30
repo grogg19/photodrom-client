@@ -87,7 +87,7 @@ ENV DATE_TIMEZONE $TZ
 COPY setups/default_nginx.conf /etc/nginx/sites-available/default
 COPY setups/www_php-fpm.conf /etc/php/7.4/fpm/pool.d/www.conf
 COPY setups/supervisord.conf /etc/supervisor/supervisord.conf
-#COPY setups/laravel-worker.conf /etc/supervisor/conf.d/laravel-worker.conf
+COPY setups/laravel-worker.conf /etc/supervisor/conf.d/laravel-worker.conf
 
 RUN mkdir /var/log/php
 
