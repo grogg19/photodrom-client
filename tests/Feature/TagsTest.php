@@ -13,6 +13,7 @@ class TagsTest extends TestCase
 {
     use RefreshDatabase;
     use WithFaker;
+
     /**
      * Testing of registered user ability to create a tag
      *
@@ -27,13 +28,15 @@ class TagsTest extends TestCase
         $photo = Photo::factory()->create();
 
         // trying to add new tag to created photo
-        $this->patch(route('photos.updateTagsInPhoto'), $attributes = [
-            'photos' => [$photo->id],
+        $this->patch(route('photos.updateTagsInPhoto'), [
+            'photos' => $photo,
             'tags' => [
-                $tag = Str::ucfirst($this->faker->unique()->word())
+                $tagName = Str::ucfirst($this->faker->unique()->word())
             ]
         ]);
 
-        $this->assertDatabaseHas('tags', ['name' => $tag]);
+        $this->assertDatabaseHas('tags', ['name' => $tagName]);
     }
+
+
 }
