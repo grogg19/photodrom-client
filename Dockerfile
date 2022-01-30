@@ -126,8 +126,6 @@ RUN bash /usr/sbin/cs.sh
 
 RUN bash /db-init.sh
 
-RUN npm install -g laravel-echo-server
-
 RUN ln -s /root/.nvm/versions/node/v$NODE_VERSION/bin/laravel-echo-server /usr/bin/laravel-echo-server
 
 COPY .env.example /.env
