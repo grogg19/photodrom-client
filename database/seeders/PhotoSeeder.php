@@ -32,7 +32,7 @@ class PhotoSeeder extends Seeder
                 $photo->tags()->attach(
                     $tags
                         ->shuffle()
-                        ->take(rand(1,4))
+                        ->take(random_int(1,4))
                         ->pluck('id')
                 );
             })
