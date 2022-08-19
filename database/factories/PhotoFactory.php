@@ -35,22 +35,33 @@ class PhotoFactory extends Factory
 
         $pathOriginal = $fullPath . 'original';
 
-        if (! is_dir($pathOriginal)) {
-            mkdir($pathOriginal, 0777, true);
+        if (!is_dir($pathOriginal)) {
+            if (!mkdir($pathOriginal, 0777, true) && !is_dir($pathOriginal)) {
+                throw new \RuntimeException(sprintf('Directory "%s" was not created', $pathOriginal));
+            }
         }
 
-        if (! is_dir($pathThumbnailSmall)) {
-            mkdir($pathThumbnailSmall, 0777, true);
+        if (!is_dir($pathThumbnailSmall)) {
+            if (!mkdir($pathThumbnailSmall, 0777, true) && !is_dir($pathThumbnailSmall)) {
+                throw new \RuntimeException(sprintf('Directory "%s" was not created', $pathThumbnailSmall));
+            }
         }
 
-        if (! is_dir($pathThumbnailBig)) {
-            mkdir($pathThumbnailBig, 0777, true);
+        if (!is_dir($pathThumbnailBig)) {
+            if (!mkdir($pathThumbnailBig, 0777, true) && !is_dir($pathThumbnailBig)) {
+                throw new \RuntimeException(sprintf('Directory "%s" was not created', $pathThumbnailBig));
+            }
         }
 
         $height = $this->faker->randomElement([800, 1200, 600]);
         $width = $this->faker->randomElement([800, 1200, 600]);
 
-        $image = $this->faker->image($pathOriginal, $height, $width);
+        // Другой фейкер, старый перестал создавать локально изображения
+        $imgFaker = \Faker\Factory::create();
+        $imgFaker->addProvider(new \Mmo\Faker\PicsumProvider($imgFaker));
+        $imgFaker->addProvider(new \Mmo\Faker\LoremSpaceProvider($imgFaker));
+
+        $image = $imgFaker->picsum($pathOriginal, $height, $width, true);
 
         copy($image, $pathThumbnailBig . DIRECTORY_SEPARATOR . basename($image));
 
