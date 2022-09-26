@@ -56,12 +56,7 @@ class PhotoFactory extends Factory
         $height = $this->faker->randomElement([800, 1200, 600]);
         $width = $this->faker->randomElement([800, 1200, 600]);
 
-        // Другой фейкер, старый перестал создавать локально изображения
-        $imgFaker = \Faker\Factory::create();
-        $imgFaker->addProvider(new \Mmo\Faker\PicsumProvider($imgFaker));
-        $imgFaker->addProvider(new \Mmo\Faker\LoremSpaceProvider($imgFaker));
-
-        $image = $imgFaker->picsum($pathOriginal, $height, $width, true);
+        $image = $this->faker->loremFlickrImage($pathOriginal, $height, $width, true);
 
         copy($image, $pathThumbnailBig . DIRECTORY_SEPARATOR . basename($image));
 
